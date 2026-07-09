@@ -1,1 +1,55 @@
 {% extends "inicio/encabezado.html" %}
+
+{% block contenido %}
+
+<section class="perfil-contenedor">
+
+    <div class="titulo-perfil">
+        <h1>Mis cursos</h1>
+    </div>
+
+    <div class="grid-cursos">
+
+        {% for inscripcion in inscripciones %}
+
+        <div class="card-curso">
+
+            <div class="imagen-curso">
+                {% if inscripcion.curso.imagen %}
+                    <img src="{{ inscripcion.curso.imagen.url }}" alt="{{ inscripcion.curso.nombre }}">
+                {% else %}
+                    <div class="imagen-placeholder">🖼️</div>
+                {% endif %}
+            </div>
+
+            <div class="info-curso">
+                <h3>{{ inscripcion.curso.nombre }}</h3>
+
+                <p>
+                    Inicio: {{ inscripcion.curso.fecha_inicio }}
+                </p>
+
+                <p>
+                    Duración: {{ inscripcion.curso.duracion_horas }} horas
+                </p>
+
+                <span class="estado">
+                    {{ inscripcion.estado }}
+                </span>
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <p class="sin-cursos">
+            Aún no te has inscrito a ningún curso.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
