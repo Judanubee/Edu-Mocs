@@ -1,38 +1,53 @@
 {% extends "inicio/encabezado.html" %}
+{% load static %}
+
+{% block titulo %}Edu Moocs - Cursos{% endblock titulo %}
 
 {% block contenido %}
+<main class="curso-detalle-page">
 
-<div class="container mt-5">
-
-    <h2>Desarrollo Web con Django</h2>
-
-    <div class="border rounded bg-light text-center p-5 my-4">
-        Área donde puedes poner imagen
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-6">
-            <h4>Profesor asignado</h4>
-            <p>Ing. Juan Pérez</p>
+    <section class="acerca-curso-banner">
+        <div class="container banner-flex">
+            <div class="banner-info">
+                <h1>Acerca del curso</h1>
+                <p class="subtitulo-curso">
+                    En este curso aprenderás lo necesario para desarrollarte en el fascinante mundo del Desarrollo Web con Django, construyendo aplicaciones robustas y escalables desde cero.
+                </p>
+                <a href="#" class="btn-inscribirme">Inscribirme</a>
+            </div>
+            <div class="banner-media">
+                <img src="{% static 'images/working.jpg' %}" alt="Desarrollo en Django" class="img-banner-curso">
+            </div>
         </div>
+    </section>
 
-        <div class="col-md-6">
-            <h4>Duración</h4>
-            <p>8 semanas</p>
+    <section class="programacion-section">
+        <div class="container text-center-container">
+            <h2>Programación</h2>
+            <p class="descripcion-programacion">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, quam vel convallis egestas, risus leo blandit sapien, eu egestas magna erat id eros. Integer vel tristique velit, eget varius nulla. Nunc id lectus sit amet nisl faucibus pulvinar quis nec magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+            </p>
+            
+            <div class="placeholder-box-purple"></div>
         </div>
+    </section>
 
-    </div>
+    <section class="costos-section">
+        <div class="container costos-container">
+            <h2>Costos</h2>
+            
+            <div class="costos-table">
+                <div class="costos-row">
+                    <span class="costo-tipo">Mensual</span>
+                    <span class="costo-precio">$100M</span>
+                </div>
+                <div class="costos-row">
+                    <span class="costo-tipo">Semestral</span>
+                    <span class="costo-precio">$100M</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <hr>
-
-    <h4>Descripción</h4>
-
-    <p>
-       Este curso está diseñado para brindar los conocimientos necesarios en el desarrollo de aplicaciones web utilizando herramientas modernas. Durante el curso, los estudiantes aprenderán conceptos fundamentales,
-        realizarán prácticas guiadas y desarrollarán un proyecto final que les permitirá aplicar lo aprendido en situaciones reales.
-    </p>
-
-</div>
-
+</main>
 {% endblock contenido %}
