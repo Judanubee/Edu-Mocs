@@ -1,47 +1,87 @@
 from django.db import models
 
 # Create your models here.
-class Alumnos(models.Model): #Define la estructura de nuestra tabla
-    matricula = models.CharField(max_length=12) #Texto corto
-    nombre = models.TextField() #Texto largo
-    carrera = models.TextField()
-    turno = models.CharField(max_length=10)
-    created = models.DateTimeField(auto_now_add=True) #Fecha y tiempo
-    updated = models.DateTimeField(auto_now_add=True)
-    class Meta:
-        verbose_name = "Alumno"
-        verbose_name_plural = "Alumnos"
-        ordering = ["-created"]
-        #el menos indica que se ordenara del más reciente al más viejo
-    def __str__(self):
-        return self.nombre
-        #Indica que se mostrára el nombre como valor en la tabla
 
-class Profesores(models.Model): #Define la estructura de nuestra tabla
-    matricula = models.CharField(max_length=12) #Texto corto
-    nombre = models.TextField() #Texto largo
-    created = models.DateTimeField(auto_now_add=True) #Fecha y tiempo
-    updated = models.DateTimeField(auto_now_add=True)
+class Profesores(models.Model):
+    nombre = models.CharField(max_length=150)
+    usuario = models.CharField(max_length=50, unique=True)
+    contrasena = models.CharField(max_length=128)
+    desc_profesor = models.TextField(null=True, blank=True)
+    perfil = models.ImageField(upload_to="profesores/", null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
     class Meta:
         verbose_name = "Profesor"
         verbose_name_plural = "Profesores"
         ordering = ["-created"]
-        #el menos indica que se ordenara del más reciente al más viejo
+
     def __str__(self):
         return self.nombre
-        #Indica que se mostrára el nombre como valor en la tabla
+class Cursos(models.Model):
+    nombre = models.CharField(max_length=150)
+    descripcion = models.TextField(null=True, blank=True)
+    categoria = models.CharField(max_length=100)
+    horas = models.PositiveIntegerField()
+    profesor = models.ForeignKey(Profesores, on_delete=models.SET_NULL, null=True, blank=True, related_name="cursos")
+    imagen = models.ImageField(
+        upload_to="cursos/",
+        null=True,
+        blank=True
+    )
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
-class AdministradoresCursos(models.Model): #Define la estructura de nuestra tabla
-    nombre = models.TextField() #Texto largo
-    correo = models.EmailField() #Texto largo
-    created = models.DateTimeField(auto_now_add=True) #Fecha y tiempo
-    updated = models.DateTimeField(auto_now_add=True)
     class Meta:
-        verbose_name = "Administrador de Cursos"
-        verbose_name_plural = "Administradores de Cursos"
+        verbose_name = "Curso"
+        verbose_name_plural = "Cursos"
         ordering = ["-created"]
-        #el menos indica que se ordenara del más reciente al más viejo
+
     def __str__(self):
         return self.nombre
-        #Indica que se mostrára el nombre como valor en la tabla
 
+class Alumnos(models.Model):
+    nombre = models.CharField(max_length=150)
+    usuario = models.CharField(max_length=50, unique=True)
+    contrasena = models.CharField(max_length=128)
+    cursos = models.ManyToManyField(
+        Cursos,
+        blank=True,
+        related_name="alumnos"
+    )
+    cursos_favoritos = models.ManyToManyField(
+        Cursos,
+        blank=True,
+        related_name="alumnos_favoritos"
+    )
+    perfil = models.ImageField(
+        upload_to="alumnos/",
+        null=True,
+        blank=True
+    )   
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Alumno"
+        verbose_name_plural = "Alumnos"
+        ordering = ["-created"]
+
+    def __str__(self):
+        return self.nombre
+
+class AdministradoresCursos(models.Model):
+    usuario = models.CharField(max_length=50, unique=True)
+    contrasena = models.CharField(max_length=128)
+    nombre = models.CharField(max_length=150)
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Administrador de cursos"
+        verbose_name_plural = "Administradores de cursos"
+        ordering = ["-created"]
+
+    def __str__(self):
+        return self.nombre

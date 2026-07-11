@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import AdministradoresCursos, Alumnos, Profesores
+from django.utils.html import format_html
+
+from .models import AdministradoresCursos, Alumnos, Profesores, Cursos
 
 # Register your models here.
 
@@ -9,3 +11,4 @@ class AdministrarModelo(admin.ModelAdmin):
 admin.site.register(Alumnos, AdministrarModelo)
 admin.site.register(Profesores, AdministrarModelo)
 admin.site.register(AdministradoresCursos, AdministrarModelo)
+admin.site.register(Cursos, AdministrarModelo)
