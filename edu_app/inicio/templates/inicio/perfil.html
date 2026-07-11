@@ -1,1 +1,56 @@
 {% extends "inicio/encabezado.html" %}
+{% load static %}
+
+{% block titulo %}Edu Moocs - Mis Cursos{% endblock titulo %}
+
+{% block contenido %}
+<main class="perfil-page">
+    <section class="perfil-contenedor">
+        
+        <div class="titulo-perfil">
+            <h1>Mis cursos</h1>
+        </div>
+
+        <div class="lista-cursos-inscritos">
+
+            {% for inscripcion in inscripciones %}
+            <div class="card-inscripcion">
+                
+                <div class="imagen-curso-container">
+                    {% if inscripcion.curso.imagen %}
+                        <img src="{{ inscripcion.curso.imagen.url }}" alt="{{ inscripcion.curso.nombre }}" class="img-curso">
+                    {% else %}
+                        <div class="imagen-placeholder">
+                            <span>🖼️</span>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="info-curso-container">
+                    <span class="badge-estado {{ inscripcion.estado|lower }}">
+                        {{ inscripcion.estado }}
+                    </span>
+                    
+                    <h2>{{ inscripcion.curso.nombre }}</h2>
+                    
+                    <div class="detalles-rapidos">
+                        <p><strong>Inicio:</strong> {{ inscripcion.curso.fecha_inicio }}</p>
+                        <p><strong>Duración:</strong> {{ inscripcion.curso.duracion_horas }} horas</p>
+                    </div>
+
+                    <a href="{% url 'cursos' %}" class="btn-ir-curso">Ir al curso</a>
+                </div>
+
+            </div>
+            {% empty %}
+            <div class="sin-cursos-box">
+                <p>Aún no te has inscrito a ningún curso.</p>
+                <a href="{% url 'cursos' %}" class="btn-explorar">Explorar cursos disponibles</a>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </section>
+</main>
+{% endblock contenido %}

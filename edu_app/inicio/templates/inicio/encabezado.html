@@ -1,35 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block titulo %} {% endblock titulo %}</title>
+    <title>{% block titulo %}Edu Moocs{% endblock titulo %}</title>
     {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-
-
 </head>
-
 <body>
 
-    <header class="header">
-    <div class="logo">
-        EDU MOCS LOGO
-    </div>
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <a href="/">Edu moocs</a>
+            </div>
 
-    <nav class="menu">
+            <nav class="nav-menu">
+                <a href="{% url 'cursos' %}" class="nav-link">Cursos</a>
+                <a href="{% url 'contacto' %}" class="nav-link">Contacto</a>
+                <a href="{% url 'login' %}" class="nav-link">Log in</a>
+            </nav>
 
-        <a href="{% url 'cursos' %}" class="cursos">CURSOS</a>
-        <a href="{% url 'contacto' %}" class="contacto">CONTACTO</a>
-        <a href="{% url 'login' %}" class="login">LOGIN</a>
-    </nav>
-
-    <div class="usuario">
-        <img src="{% static 'images/user.png' %}" alt="User" class="img-usuario">
-        <button class="btn-usuario"><a href="{% url 'perfil' %}">MIS CURSOS</a></button>
-    </div>
-</header>
+            <div class="nav-actions">
+                <a href="{% url 'login' %}" class="btn-ingresar">Ingresar</a>
+            </div>
+        </div>
+    </header>
 
     {% block contenido %}{% endblock contenido %}
+
 </body>
 </html>
