@@ -16,7 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from edu_app import settings
 from inicio import views 
+from django.contrib.auth import views as auth_views
+from registros.views import LoginPersonalizado
+
+
 
 
 urlpatterns = [
@@ -24,6 +29,12 @@ urlpatterns = [
     path('', views.principal, name='principal'),
     path('cursos/', views.cursos, name='cursos'),
     path('contacto/', views.contacto, name='contacto'),
-    path('login/', views.login, name='login'),
     path('perfil/', views.perfil, name='perfil'),
+    path("login/",LoginPersonalizado.as_view(),name="login"),
+    path("perfil_alumno/", views.perfil_alumno, name="perfil_alumno"),
+    path("perfil_profesor/", views.perfil_profesor, name="perfil_profesor"),
 ]
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

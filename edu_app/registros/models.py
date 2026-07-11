@@ -1,11 +1,13 @@
 from django.db import models
-
+from django.conf import settings
 # Create your models here.
 
 class Profesores(models.Model):
     nombre = models.CharField(max_length=150)
-    usuario = models.CharField(max_length=50, unique=True)
-    contrasena = models.CharField(max_length=128)
+    usuario = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="perfil_profesor")    
     desc_profesor = models.TextField(null=True, blank=True)
     perfil = models.ImageField(upload_to="profesores/", null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -42,8 +44,11 @@ class Cursos(models.Model):
 
 class Alumnos(models.Model):
     nombre = models.CharField(max_length=150)
-    usuario = models.CharField(max_length=50, unique=True)
-    contrasena = models.CharField(max_length=128)
+    usuario = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="perfil_alumno"
+    )
     cursos = models.ManyToManyField(
         Cursos,
         blank=True,

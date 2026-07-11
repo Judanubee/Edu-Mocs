@@ -19,11 +19,27 @@
             <nav class="nav-menu">
                 <a href="{% url 'cursos' %}" class="nav-link">Cursos</a>
                 <a href="{% url 'contacto' %}" class="nav-link">Contacto</a>
-                <a href="{% url 'login' %}" class="nav-link">Log in</a>
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'login' %}" class="nav-link">Log in</a>
+                {% endif %}
             </nav>
 
-            <div class="nav-actions">
-                <a href="{% url 'login' %}" class="btn-ingresar">Ingresar</a>
+            <div class = "usuario">
+
+                {% if user.is_authenticated %}
+
+                    {% if es_alumno %}
+                        <a href="{% url 'perfil_alumno' %}" class="btn-usuario">MI PERFIL</a>
+                    {% elif es_profesor %}
+                        <a href="{% url 'perfil_profesor' %}" class="btn-usuario">MI PERFIL</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn-usuario">
+                            CAMBIAR USUARIO
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn-usuario">INICIAR SESIÓN</a>
+                {% endif %}
             </div>
         </div>
     </header>

@@ -1,1 +1,31 @@
 {% extends "inicio/encabezado.html" %}
+
+
+
+{% 
+    {% block titulo %} Principal {% endblock titulo %}
+%}
+
+{% block contenido %}
+    <h1>Bienvenido a EDU MOCS</h1>
+    <p>Este es el contenido principal de la página.</p>
+
+
+    <div class = "cursos-container">
+        {% for curso in cursos %}
+        <div class="curso">
+        {% if curso.imagen %}
+            <img src="{{ curso.imagen.url }}" alt="{{ curso.nombre }}" class="imagen-curso">
+        {% endif %}
+            <h2>{{ curso.nombre }}</h2>
+            <p>{{ curso.descripcion }}</p>
+            <strong>Profesor:</strong> {{ curso.profesor.nombre }}<br>
+            <strong>Categoria:</strong> {{ curso.categoria }}<br>
+            <p> <strong>Duración:</strong> {{ curso.horas }} Horas </p><br>
+        {% empty %}
+            <p>No hay cursos disponibles.</p>      
+        {% endfor %}
+        </div>
+
+
+{% endblock %}
