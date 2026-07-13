@@ -1,0 +1,83 @@
+{% extends "inicio/encabezado.html" %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'registros/css/admin.css' %}">
+{% endblock css %}
+
+{% block titulo %}
+    Panel administrativo
+{% endblock titulo %}
+
+{% block contenido %}
+
+<main class="panel-administrador">
+
+    <h1>Panel administrativo</h1>
+
+    <div class="acciones-administrador">
+
+        <a href="{% url 'registrar_alumno' %}">
+            Registrar alumno
+        </a>
+
+        <a href="{% url 'registrar_profesor' %}">
+            Registrar profesor
+        </a>
+
+        <a href="{% url 'registrar_curso' %}">
+            Registrar curso
+        </a>
+
+    </div>
+
+    <section>
+        <h2>Alumnos</h2>
+
+        {% for alumno in alumnos %}
+            <div>
+                <strong>{{ alumno.nombre }}</strong>
+                <span>{{ alumno.usuario.username }}</span>
+            </div>
+        {% empty %}
+            <p>No hay alumnos registrados.</p>
+        {% endfor %}
+    </section>
+
+    <section>
+        <h2>Profesores</h2>
+
+        {% for profesor in profesores %}
+            <div>
+                <strong>{{ profesor.nombre }}</strong>
+                <span>{{ profesor.usuario.username }}</span>
+            </div>
+        {% empty %}
+            <p>No hay profesores registrados.</p>
+        {% endfor %}
+    </section>
+
+    <section>
+        <h2>Cursos</h2>
+
+        {% for curso in cursos %}
+            <div>
+                <strong>{{ curso.nombre }}</strong>
+
+                {% if curso.profesor %}
+                    <span>
+                        Profesor: {{ curso.profesor.nombre }}
+                    </span>
+                {% else %}
+                    <span>Sin profesor</span>
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No hay cursos registrados.</p>
+        {% endfor %}
+    </section>
+
+</main>
+
+{% endblock contenido %}

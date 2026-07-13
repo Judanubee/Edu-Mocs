@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from inicio import views 
 from registros.views import LoginPersonalizado
+from registros import views as registros_views
 
 
 
@@ -45,6 +46,29 @@ urlpatterns = [
         views.inscribirse_curso,
         name="inscribirse_curso"
     ),
+    path(
+    "panel-administrador/",
+    registros_views.panel_administrador,
+    name="panel_administrador"
+),
+
+path(
+    "panel-administrador/alumnos/nuevo/",
+    registros_views.registrar_alumno,
+    name="registrar_alumno"
+),
+
+path(
+    "panel-administrador/profesores/nuevo/",
+    registros_views.registrar_profesor,
+    name="registrar_profesor"
+),
+
+path(
+    "panel-administrador/cursos/nuevo/",
+    registros_views.registrar_curso,
+    name="registrar_curso"
+),
     ]
 
 if settings.DEBUG:

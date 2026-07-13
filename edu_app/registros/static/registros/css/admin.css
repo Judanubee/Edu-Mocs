@@ -1,0 +1,165 @@
+:root{
+    --platinum: #e7ecef;
+    --dusk-blue: #274c77;
+    --steel-blue: #6096ba;
+    --icy-blue: #a3cef1;
+    --grey-olive: #8b8c89;
+}
+
+/* ---------- GENERAL ---------- */
+
+body{
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--platinum);
+    color: var(--dusk-blue);
+}
+
+/* ---------- CONTENEDOR ---------- */
+
+.panel-administrador,
+.formulario-administrador{
+    width: 85%;
+    max-width: 1000px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+.panel-administrador h1,
+.formulario-administrador h1{
+    text-align: center;
+    color: var(--dusk-blue);
+    margin-bottom: 30px;
+}
+
+/* ---------- BOTONES ---------- */
+
+.acciones-administrador{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.acciones-administrador a,
+button{
+    background: var(--dusk-blue);
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: .3s;
+    font-weight: bold;
+}
+
+.acciones-administrador a:hover,
+button:hover{
+    background: var(--steel-blue);
+}
+
+/* ---------- FORMULARIOS ---------- */
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form p{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+label{
+    margin-bottom: 5px;
+    color: var(--dusk-blue);
+    font-weight: bold;
+}
+
+input,
+select,
+textarea{
+    padding: 10px;
+    border: 1px solid var(--grey-olive);
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    outline: none;
+    border-color: var(--steel-blue);
+}
+
+/* ---------- LISTAS ---------- */
+
+section{
+    margin-top: 30px;
+}
+
+section h2{
+    color: var(--dusk-blue);
+    border-bottom: 3px solid var(--steel-blue);
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+/* ---------- TARJETAS ---------- */
+
+section div{
+    background: var(--icy-blue);
+    border-left: 6px solid var(--dusk-blue);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+section div strong{
+    display: block;
+    color: var(--dusk-blue);
+    font-size: 18px;
+}
+
+section div span{
+    color: #333;
+}
+
+/* ---------- MENSAJES ---------- */
+
+.success{
+    background: #d9f4dc;
+    color: green;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.error{
+    background: #ffe0e0;
+    color: darkred;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+/* ---------- ENLACE REGRESAR ---------- */
+
+.regresar{
+    display: inline-block;
+    margin-top: 20px;
+    color: var(--dusk-blue);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.regresar:hover{
+    color: var(--steel-blue);
+}

@@ -1,0 +1,35 @@
+{% extends "inicio/encabezado.html" %}
+
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'registros/css/admin.css' %}">
+{% endblock css %}
+
+{% block titulo %}
+    Registrar curso
+{% endblock titulo %}
+
+{% block contenido %}
+
+<main class="formulario-administrador">
+
+    <h1>Registrar curso</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Guardar curso
+        </button>
+    </form>
+
+    <a href="{% url 'panel_administrador' %}" class="regresar">
+    ← Regresar al panel
+    </a>
+
+</main>
+
+{% endblock contenido %}
