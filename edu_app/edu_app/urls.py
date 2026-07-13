@@ -28,10 +28,6 @@ urlpatterns = [
     
     # 1. Ruta para el CATÁLOGO (Tu vista original que daba error 404)
     path('cursos/', views.cursos, name='cursos'),
-    
-    # 2. Ruta nueva para el DETALLE de cada curso individual
-    path('cursos/<int:id>/', views.curso_detalle, name='curso_detalle'),
-    
     path('contacto/', views.contacto, name='contacto'),
     path('perfil/', views.perfil, name='perfil'),
     path("login/",LoginPersonalizado.as_view(),name="login"),
