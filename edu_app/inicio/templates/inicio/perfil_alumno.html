@@ -1,1 +1,87 @@
 {% extends "inicio/encabezado.html" %}
+{% load static %}
+
+{% block contenido %}
+
+<link rel="stylesheet" href="{% static 'registros/css/perfil_alumno.css' %}">
+
+<main class="perfil-alumno">
+
+    <section class="encabezado-perfil">
+        <h1>Mis cursos</h1>
+
+        <p>
+            Consulta los cursos en los que estás inscrito.
+        </p>
+    </section>
+
+    <section class="contenedor-cursos">
+
+        {% for curso in cursos %}
+
+            <article class="tarjeta-curso">
+
+                <div class="contenedor-imagen">
+
+                    {% if curso.imagen %}
+                        <img
+                            src="{{ curso.imagen.url }}"
+                            alt="Imagen del curso {{ curso.nombre }}"
+                            class="imagen-curso"
+                        >
+                    {% else %}
+                        <img
+                            src="{% static 'registros/img/curso_sin_imagen.png' %}"
+                            alt="Curso sin imagen"
+                            class="imagen-curso"
+                        >
+                    {% endif %}
+
+                </div>
+
+                <div class="informacion-curso">
+
+                    <h2>{{ curso.nombre }}</h2>
+
+                    <p class="categoria">
+                        {{ curso.categoria }}
+                    </p>
+
+                    <p class="duracion">
+                        Duración: {{ curso.horas }} horas
+                    </p>
+
+                    <a
+                        href="{% url 'detalle_curso' curso.id %}"
+                        class="boton-ingresar"
+                    >
+                        Ingresar
+                    </a>
+
+                </div>
+
+            </article>
+
+        {% empty %}
+
+            <div class="sin-cursos">
+
+                <h2>Aún no tienes cursos inscritos</h2>
+
+                <p>
+                    Explora el catálogo y selecciona el curso que deseas estudiar.
+                </p>
+
+                <a href="{% url 'cursos' %}" class="boton-catalogo">
+                    Ver cursos
+                </a>
+
+            </div>
+
+        {% endfor %}
+
+    </section>
+
+</main>
+
+{% endblock contenido %}

@@ -1,1 +1,68 @@
 {% extends "inicio/encabezado.html" %}
+{% load static %}
+
+{% block contenido %}
+
+<link rel="stylesheet" href="{% static 'registros/css/perfil_profesor.css' %}">
+
+<main class="perfil-profesor">
+
+    <section class="encabezado-profesor">
+        <h1>Cursos asignados</h1>
+    </section>
+
+    <section class="contenedor-cursos-profesor">
+
+        {% for curso in cursos %}
+
+            <article class="tarjeta-curso-profesor">
+
+                <div class="contenedor-imagen-profesor">
+
+                    {% if curso.imagen %}
+                        <img
+                            src="{{ curso.imagen.url }}"
+                            alt="Imagen del curso {{ curso.nombre }}"
+                            class="imagen-curso-profesor"
+                        >
+                    {% else %}
+                        <div class="imagen-sin-curso">
+                            Sin imagen
+                        </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="informacion-curso-profesor">
+
+                    <h2>{{ curso.nombre }}</h2>
+
+                    {% if curso.categoria %}
+                        <p>{{ curso.categoria }}</p>
+                    {% endif %}
+
+                    {% if curso.horas %}
+                        <span>{{ curso.horas }} horas</span>
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+        {% empty %}
+
+            <div class="sin-cursos-asignados">
+                <h2>No tienes cursos asignados</h2>
+
+                <p>
+                    Los cursos que te asigne el administrador aparecerán aquí.
+                </p>
+            </div>
+
+        {% endfor %}
+
+    </section>
+
+</main>
+
+{% endblock contenido %}
