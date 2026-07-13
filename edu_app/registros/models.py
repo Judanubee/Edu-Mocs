@@ -20,6 +20,8 @@ class Profesores(models.Model):
 
     def __str__(self):
         return self.nombre
+    
+    
 class Cursos(models.Model):
     nombre = models.CharField(max_length=150)
     descripcion = models.TextField(null=True, blank=True)
@@ -80,6 +82,7 @@ class AdministradoresCursos(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="perfil_adminCurso")
+
     nombre = models.CharField(max_length=150)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
