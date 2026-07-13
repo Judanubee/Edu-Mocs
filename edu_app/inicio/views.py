@@ -54,16 +54,12 @@ def perfil_profesor(request):
         usuario=request.user
     )
 
-    cursos = profesor.cursos.all()
+    cursos = profesor.cursos.prefetch_related("alumnos").all()
 
-    return render(
-        request,
-        "inicio/perfil_profesor.html",
-        {
-            "profesor": profesor,
-            "cursos": cursos,
-        }
-    )
+    return render(request, "inicio/perfil_profesor.html", {
+        "profesor": profesor,
+        "cursos": cursos,
+    })
 
 @login_required
 def curso_info(request, id):

@@ -45,6 +45,40 @@
                         <span>{{ curso.horas }} horas</span>
                     {% endif %}
 
+                    <div class="alumnos-curso">
+
+                        <h3>Alumnos inscritos</h3>
+
+                        <p class="total-alumnos">
+                            Total: {{ curso.alumnos.count }}
+                        </p>
+
+                        {% for alumno in curso.alumnos.all %}
+
+                            <div class="alumno-inscrito">
+
+                               
+                                <div class="datos-alumno">
+                                    <strong>{{ alumno.nombre }}</strong>
+
+                                    {% if alumno.usuario.email %}
+                                        <p>{{ alumno.usuario.email }}</p>
+                                    {% else %}
+                                        <p>{{ alumno.usuario.username }}</p>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+                    {% empty %}
+
+                        <p class="sin-alumnos">
+                            No hay alumnos inscritos en este curso.
+                        </p>
+
+                    {% endfor %}
+
+                </div>
+
                 </div>
 
             </article>
