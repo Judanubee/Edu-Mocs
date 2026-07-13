@@ -1,0 +1,14 @@
+* [33m2e71969[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Resolviendo conflictos del merge
+*   [33me65d75b[m Merge remote-tracking branch 'origin/zaid'
+[32m|[m[33m\[m  
+[32m|[m * [33m0218902[m[33m ([m[1;31morigin/zaid[m[33m)[m Estilos y comunicacion de las plantillas a los modelos
+* [33m|[m [33ma81f85f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m curso_info ya guarda los cursos a los que el alumno se registra
+* [33m|[m [33mce748be[m[33m ([m[1;32mGit--Merge-Branch[m[33m)[m Cerrar sesion, inicio de perfiles arrelado, nueva pagina: info perfil
+[33m|[m[33m/[m  
+* [33mbd38a7e[m Creacion correcta de usuarios y cursos, pagina principal correcta, logica de la app correcta, login con django correcto. perifl de usuario redirecciona a su tipo de usuario, entre mas cambios
+*   [33m18c0dfc[m Merge branch 'main' of https://github.com/Judanubee/Edu-Mocs
+[34m|[m[35m\[m  
+[34m|[m * [33m3b49dbf[m Estilos
+[34m|[m *   [33mc1be249[m Merge branch 'main' of https://github.com/Judanubee/Edu-Mocs
+[34m|[m [36m|[m[1;31m\[m  
+[34m|[m [36m|[m * [33md4b3de1[m plantilla de cursos
