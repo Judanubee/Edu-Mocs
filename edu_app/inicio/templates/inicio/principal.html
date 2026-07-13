@@ -1,31 +1,60 @@
 {% extends "inicio/encabezado.html" %}
+{% load static %}
 
-
-
-{% 
-    {% block titulo %} Principal {% endblock titulo %}
-%}
+{% block titulo %} Principal | Edu Moocs {% endblock titulo %}
 
 {% block contenido %}
-    <h1>Bienvenido a EDU MOCS</h1>
-    <p>Este es el contenido principal de la página.</p>
+<main class="main-home">
 
-
-    <div class = "cursos-container">
-        {% for curso in cursos %}
-        <div class="curso">
-        {% if curso.imagen %}
-            <img src="{{ curso.imagen.url }}" alt="{{ curso.nombre }}" class="imagen-curso">
-        {% endif %}
-            <h2>{{ curso.nombre }}</h2>
-            <p>{{ curso.descripcion }}</p>
-            <strong>Profesor:</strong> {{ curso.profesor.nombre }}<br>
-            <strong>Categoria:</strong> {{ curso.categoria }}<br>
-            <p> <strong>Duración:</strong> {{ curso.horas }} Horas </p><br>
-        {% empty %}
-            <p>No hay cursos disponibles.</p>      
-        {% endfor %}
+    <!-- 1. Hero Banner -->
+    <section class="hero-section">
+        <div class="hero-container">
+            <div class="hero-text">
+                <h1>Edu Moocs</h1>
+                <p>Cursos de tecnología</p>
+            </div>
+            <div class="hero-image-box">
+                <img src="{% static 'images/estudiantes-hero.jpg' %}" alt="Edu Moocs">
+            </div>
         </div>
+    </section>
 
+    <!-- 2. Texto Central -->
+    <section class="descripcion-central">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, quam vel convallis egestas, risus leo blandit sapien, eu egestas magna erat id eros. Integer vel tristique velit, eget varius nulla. Nunc id lectus sit amet nisl faucibus pulvinar quis nec magna.</p>
+    </section>
 
+    <!-- 3. Contenedor de Cursos Dinámicos -->
+    <section class="home-container">
+        <div class="cursos-container">
+            {% for curso in cursos %}
+                <div class="curso">
+                    <!-- Bloque Imagen -->
+                    {% if curso.imagen %}
+                        <img src="{{ curso.imagen.url }}" alt="{{ curso.nombre }}" class="imagen-curso">
+                    {% else %}
+                        <div class="imagen-placeholder">🖼️</div>
+                    {% endif %}
+                    
+                    <!-- Bloque Información -->
+                    <div class="curso-info">
+                        <span class="categoria">{{ curso.categoria|default:"Tecnología" }}</span>
+                        <h2>{{ curso.nombre }}</h2>
+                        <p>{{ curso.descripcion }}</p>
+                        
+                        <div class="detalles-texto">
+                            <strong>Profesor:</strong> {{ curso.profesor.nombre }}<br>
+                            <strong>Duración:</strong> {{ curso.horas }} Horas
+                        </div>
+                        
+                        <a href="{% url 'cursos' %}" class="btn-aprende">Aprende</a>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="sin-cursos">No hay cursos disponibles en este momento.</p>      
+            {% endfor %}
+        </div>
+    </section>
+
+</main>
 {% endblock %}

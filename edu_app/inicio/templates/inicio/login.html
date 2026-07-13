@@ -1,54 +1,139 @@
+{% extends "inicio/encabezado.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Iniciar sesión | Edu Mocs</title>
-    <link rel="stylesheet" href="">
-</head>
+{% block titulo %}Iniciar sesión | Edu Mocs{% endblock titulo %}
 
-<body>
+{% block contenido %}
+<!-- Estilos incrustados para forzar el diseño de inmediato -->
+<style>
+    .login-page {
+        min-height: 70vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        padding: 40px 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-<div class="login-container">
+    .login-container {
+        width: 100%;
+        max-width: 380px;
+        text-align: center;
+    }
 
-    <h1>Iniciar sesión</h1>
+    .login-container h1 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #000000;
+        margin-bottom: 30px;
+    }
 
-    {% if form.errors %}
-        <p class="error">
-            El usuario o la contraseña son incorrectos.
-        </p>
-    {% endif %}
+    .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
 
-    <form method="POST">
-        {% csrf_token %}
+    .campo-login {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        gap: 6px;
+    }
 
-        <div class="campo">
-            <label for="{{ form.username.id_for_label }}">
-                Usuario 
-            </label>
+    .campo-login label {
+        font-size: 15px;
+        font-weight: 600;
+        color: #000000;
+    }
 
-            {{ form.username }}
-        </div>
+    /* Forzamos el diseño de las cajas de texto como en la página de contacto */
+    .input-login {
+        width: 100%;
+        padding: 12px 14px;
+        font-size: 15px;
+        border: 1px solid #d1d5db !important;
+        border-radius: 4px !important;
+        background-color: #ffffff !important;
+        outline: none;
+        box-sizing: border-box;
+        display: block;
+        color: #000000;
+    }
 
-        <div class="campo">
-            <label for="{{ form.password.id_for_label }}">
-                Contraseña
-            </label>
+    .input-login:focus {
+        border-color: #0d0843 !important;
+        box-shadow: 0 0 0 1px #0d0843;
+    }
 
-            {{ form.password }}
-        </div>
+    /* Botón Ovalado Azul Oscuro */
+    .btn-submit-login {
+        background-color: #0d0843 !important;
+        color: #ffffff !important;
+        border: none !important;
+        padding: 12px !important;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 25px !important;
+        cursor: pointer;
+        margin-top: 15px;
+        width: 100%;
+        transition: background-color 0.2s ease;
+    }
 
-        {% if next %}
-            <input type="hidden" name="next" value="{{ next }}">
+    .btn-submit-login:hover {
+        background-color: #1a126b !important;
+    }
+
+    .error-message {
+        background-color: #fee2e2;
+        color: #b91c1c;
+        padding: 12px;
+        border-radius: 4px;
+        font-size: 14px;
+        margin-bottom: 20px;
+        text-align: left;
+        border-left: 4px solid #b91c1c;
+    }
+</style>
+
+<main class="login-page">
+    <div class="login-container">
+
+        <h1>Iniciar sesión</h1>
+
+        {% if form.errors %}
+            <p class="error-message">
+                El usuario o la contraseña son incorrectos.
+            </p>
         {% endif %}
 
-        <button type="submit">
-            Iniciar sesión
-        </button>
-    </form>
+        <form method="POST" class="login-form">
+            {% csrf_token %}
 
-</div>
+            <!-- Campo de Usuario -->
+            <div class="campo-login">
+                <label for="id_username">Usuario</label>
+                <input type="text" name="username" id="id_username" required autofocus class="input-login" value="{{ form.username.value|default_if_none:'' }}">
+            </div>
 
-</body>
-</html>
+            <!-- Campo de Contraseña -->
+            <div class="campo-login">
+                <label for="id_password">Contraseña</label>
+                <input type="password" name="password" id="id_password" required class="input-login">
+            </div>
+
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}">
+            {% endif %}
+
+            <!-- Botón de Envío -->
+            <button type="submit" class="btn-submit-login">
+                Iniciar sesión
+            </button>
+        </form>
+
+    </div>
+</main>
+{% endblock contenido %}
