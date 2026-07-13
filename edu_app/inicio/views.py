@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.http import require_POST
-from django.contrib.auth.decorators import login_required
 
-from registros.models import Cursos, Alumnos, Profesores
+from registros.models import Cursos, Alumnos
 
 
 @login_required
@@ -14,22 +14,19 @@ def principal(request):
         "cursos": cursos,
     })
 
-@login_required
-def curso_detalle(request, id):
-    curso = get_object_or_404(Cursos, id=id)
 
-    return render(request, "inicio/curso_detalle.html", {
-        "curso": curso,
+@login_required
+def cursos(request):
+    cursos_disponibles = Cursos.objects.all()
+
+    return render(request, "inicio/cursos.html", {
+        "cursos": cursos_disponibles,
     })
 
 
 @login_required
 def contacto(request):
-    profesores = Profesores.objects.all()
-
-    return render(request, "inicio/contacto.html", {
-        "profesores": profesores,
-    })
+    return render(request, "inicio/contacto.html")
 
 
 @login_required
@@ -52,15 +49,7 @@ def perfil_alumno(request):
 
 @login_required
 def perfil_profesor(request):
-    profesor = get_object_or_404(
-        Profesores,
-        usuario=request.user
-    )
-
-    return render(request, "inicio/perfil_profesor.html", {
-        "profesor": profesor,
-        "cursos": profesor.cursos.all(),
-    })
+    return render(request, "inicio/perfil_profesor.html")
 
 
 @login_required

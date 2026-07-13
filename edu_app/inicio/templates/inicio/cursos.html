@@ -1,49 +1,53 @@
 {% extends "inicio/encabezado.html" %}
 {% load static %}
 
-{% block titulo %}Edu Moocs - Catálogo de Cursos{% endblock titulo %}
+{% block titulo %}Edu Moocs - Cursos{% endblock titulo %}
 
 {% block contenido %}
-<main class="catalogo-page" style="padding: 40px 20px; background-color: #e9edf2; min-height: 80vh;">
-    <div class="container" style="max-width: 1200px; margin: 0 auto;">
-        <h1 style="color: #1a365d; text-align: center; margin-bottom: 40px; font-weight: 700;">Nuestros Cursos Disponibles</h1>
-        
-        <div class="cursos-grid" style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: center;">
-            {% for curso in cursos %}
-                <div class="tarjeta-curso" style="background: white; border-radius: 8px; width: 300px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column;">
-                    
-                    <!-- Imagen de la tarjeta -->
-                    <div class="tarjeta-media" style="height: 160px; background: #cbd5e1; position: relative;">
-                        {% if curso.imagen %}
-                            <img src="{{ curso.imagen.url }}" alt="{{ curso.nombre }}" style="width: 100%; height: 100%; object-fit: cover;">
-                        {% else %}
-                            <img src="{% static 'images/working.jpg' %}" alt="Por defecto" style="width: 100%; height: 100%; object-fit: cover;">
-                        {% endif %}
-                        <span style="position: absolute; top: 10px; left: 10px; background: #244b7a; color: white; padding: 4px 8px; font-size: 11px; border-radius: 4px; font-weight: bold; text-transform: uppercase;">
-                            {{ curso.categoria }}
-                        </span>
-                    </div>
+<main class="curso-detalle-page">
 
-                    <!-- Contenido de la tarjeta -->
-                    <div class="tarjeta-body" style="padding: 20px; flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
-                        <div>
-                            <h3 style="color: #1a365d; margin: 0 0 10px 0; font-size: 18px; font-weight: 600;">{{ curso.nombre }}</h3>
-                            <p style="color: #64748b; font-size: 13px; line-height: 1.4; margin: 0 0 15px 0;">
-                                ⏱️ {{ curso.horas }} horas totales
-                            </p>
-                        </div>
-                        
-                        <!-- ENLACE CORREGIDO: Redirige a la vista curso_detalle pasándole el ID -->
-                        <a href="{% url 'curso_detalle' curso.id %}" style="display: block; text-align: center; background: #244b7a; color: white; padding: 10px; border-radius: 4px; text-decoration: none; font-size: 14px; font-weight: 600; transition: background 0.2s;">
-                            Ver detalles
-                        </a>
-                    </div>
-
-                </div>
-            {% empty %}
-                <p style="text-align: center; color: #64748b; font-size: 16px; width: 100%;">No hay cursos disponibles en el catálogo en este momento.</p>
-            {% endfor %}
+    <section class="acerca-curso-banner">
+        <div class="container banner-flex">
+            <div class="banner-info">
+                <h1>Acerca del curso</h1>
+                <p class="subtitulo-curso">
+                    En este curso aprenderás lo necesario para desarrollarte en el fascinante mundo del Desarrollo Web con Django, construyendo aplicaciones robustas y escalables desde cero.
+                </p>
+                <a href="#" class="btn-inscribirme">Inscribirme</a>
+            </div>
+            <div class="banner-media">
+                <img src="{% static 'images/working.jpg' %}" alt="Desarrollo en Django" class="img-banner-curso">
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section class="programacion-section">
+        <div class="container text-center-container">
+            <h2>Programación</h2>
+            <p class="descripcion-programacion">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, quam vel convallis egestas, risus leo blandit sapien, eu egestas magna erat id eros. Integer vel tristique velit, eget varius nulla. Nunc id lectus sit amet nisl faucibus pulvinar quis nec magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+            </p>
+            
+            <div class="placeholder-box-purple"></div>
+        </div>
+    </section>
+
+    <section class="costos-section">
+        <div class="container costos-container">
+            <h2>Costos</h2>
+            
+            <div class="costos-table">
+                <div class="costos-row">
+                    <span class="costo-tipo">Mensual</span>
+                    <span class="costo-precio">$100M</span>
+                </div>
+                <div class="costos-row">
+                    <span class="costo-tipo">Semestral</span>
+                    <span class="costo-precio">$100M</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </main>
 {% endblock contenido %}

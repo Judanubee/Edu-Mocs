@@ -22,11 +22,12 @@ from django.contrib.auth import views as auth_views
 from inicio import views 
 from registros.views import LoginPersonalizado
 
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.principal, name='principal'),
-    
-    # 1. Ruta para el CATÁLOGO (Tu vista original que daba error 404)
     path('cursos/', views.cursos, name='cursos'),
     path('contacto/', views.contacto, name='contacto'),
     path('perfil/', views.perfil, name='perfil'),
