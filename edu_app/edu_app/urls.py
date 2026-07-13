@@ -31,8 +31,10 @@ urlpatterns = [
     path('contacto/', views.contacto, name='contacto'),
     path('perfil/', views.perfil, name='perfil'),
     path("login/",LoginPersonalizado.as_view(),name="login"),
+    path("logout/",auth_views.LogoutView.as_view(),name="logout"),
     path("perfil_alumno/", views.perfil_alumno, name="perfil_alumno"),
     path("perfil_profesor/", views.perfil_profesor, name="perfil_profesor"),
+    path("curso_info/", views.curso_info, name="curso_info"),
 ]
 
 if settings.DEBUG:

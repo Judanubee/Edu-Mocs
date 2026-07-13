@@ -22,6 +22,7 @@
             <strong>Profesor:</strong> {{ curso.profesor.nombre }}<br>
             <strong>Categoria:</strong> {{ curso.categoria }}<br>
             <p> <strong>Duración:</strong> {{ curso.horas }} Horas </p><br>
+            <a href="{% url 'curso_info' %}" class="btn-ver-curso">Ver curso</a>
         {% empty %}
             <p>No hay cursos disponibles.</p>      
         {% endfor %}

@@ -30,13 +30,16 @@
 
                     {% if es_alumno %}
                         <a href="{% url 'perfil_alumno' %}" class="btn-usuario">MI PERFIL</a>
+
                     {% elif es_profesor %}
                         <a href="{% url 'perfil_profesor' %}" class="btn-usuario">MI PERFIL</a>
-                    {% else %}
-                        <a href="{% url 'login' %}" class="btn-usuario">
-                            CAMBIAR USUARIO
-                        </a>
                     {% endif %}
+                    <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+
+                    <button type="submit" class="btn-logout">
+                        CERRAR SESIÓN
+                    </button>
                 {% else %}
                     <a href="{% url 'login' %}" class="btn-usuario">INICIAR SESIÓN</a>
                 {% endif %}

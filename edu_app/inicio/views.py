@@ -42,3 +42,6 @@ def perfil_alumno(request):
 @login_required
 def perfil_profesor(request):
     return render(request, "inicio/perfil_profesor.html")
+@login_required
+def curso_info(request):
+    return render(request, "inicio/curso_info.html")
