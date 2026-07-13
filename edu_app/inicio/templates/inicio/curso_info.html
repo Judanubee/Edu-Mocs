@@ -1,3 +1,94 @@
 {% extends "inicio/encabezado.html" %}
 
 
+
+{% block titulo %}
+    {{ curso.nombre }}
+{% endblock titulo %}
+
+{% block contenido %}
+
+<div class="detalle-curso">
+
+    {% if curso.imagen %}
+        <img
+            src="{{ curso.imagen.url }}"
+            alt="{{ curso.nombre }}"
+            class="detalle-imagen"
+        >
+    {% endif %}
+
+    <h1>{{ curso.nombre }}</h1>
+
+    <p>{{ curso.descripcion }}</p>
+
+    <p>
+        <strong>Categoría:</strong>
+        {{ curso.categoria }}
+    </p>
+
+    <p>
+        <strong>Duración:</strong>
+        {{ curso.horas }} horas
+    </p>
+
+    {% if curso.profesor %}
+        <div class="profesor-curso">
+
+            {% if curso.profesor.perfil %}
+                <img
+                    src="{{ curso.profesor.perfil.url }}"
+                    alt="{{ curso.profesor.nombre }}"
+                    class="imagen-profesor"
+                >
+            {% endif %}
+
+            <h2>Profesor</h2>
+            <p>{{ curso.profesor.nombre }}</p>
+
+            {% if curso.profesor.desc_profesor %}
+                <p>{{ curso.profesor.desc_profesor }}</p>
+            {% endif %}
+
+        </div>
+    {% else %}
+        <p>Este curso todavía no tiene profesor asignado.</p>
+    {% endif %}
+
+    {% if user.is_authenticated and es_alumno %}
+
+        {% if curso in user.perfil_alumno.cursos.all %}
+            <p class="mensaje-inscrito">
+                Ya estás inscrito en este curso.
+            </p>
+        {% else %}
+            <form method="POST"
+                action="{% url 'inscribirse_curso' curso.id %}">
+                {% csrf_token %}
+
+                <button type="submit" class="btn-inscribirse">
+                    Inscribirse
+                </button>
+            </form>
+        {% endif %}
+
+    {% elif user.is_authenticated %}
+
+        <p>Solo los alumnos pueden inscribirse a cursos.</p>
+
+    {% else %}
+
+        <a href="{% url 'login' %}?next={{ request.path }}"
+        class="btn-inscribirse">
+            Inicia sesión para inscribirte
+        </a>
+
+    {% endif %}
+
+
+
+
+    
+</div>
+
+{% endblock contenido %}

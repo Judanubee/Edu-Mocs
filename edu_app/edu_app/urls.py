@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from edu_app import settings
-from inicio import views 
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from inicio import views 
 from registros.views import LoginPersonalizado
 
 
@@ -34,8 +35,17 @@ urlpatterns = [
     path("logout/",auth_views.LogoutView.as_view(),name="logout"),
     path("perfil_alumno/", views.perfil_alumno, name="perfil_alumno"),
     path("perfil_profesor/", views.perfil_profesor, name="perfil_profesor"),
-    path("curso_info/", views.curso_info, name="curso_info"),
-]
+    path(
+        "curso_info/<int:id>/",
+        views.curso_info,
+        name="curso_info"
+    ),
+      path(
+        "inscribirse_curso/<int:id>/",
+        views.inscribirse_curso,
+        name="inscribirse_curso"
+    ),
+    ]
 
 if settings.DEBUG:
     from django.conf.urls.static import static

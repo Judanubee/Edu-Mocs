@@ -76,10 +76,11 @@ class Alumnos(models.Model):
         return self.nombre
 
 class AdministradoresCursos(models.Model):
-    usuario = models.CharField(max_length=50, unique=True)
-    contrasena = models.CharField(max_length=128)
+    usuario = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="perfil_adminCurso")
     nombre = models.CharField(max_length=150)
-
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

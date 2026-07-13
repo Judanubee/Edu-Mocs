@@ -34,12 +34,12 @@
                     {% elif es_profesor %}
                         <a href="{% url 'perfil_profesor' %}" class="btn-usuario">MI PERFIL</a>
                     {% endif %}
-                    <form method="POST" action="{% url 'logout' %}">
-                    {% csrf_token %}
-
-                    <button type="submit" class="btn-logout">
-                        CERRAR SESIÓN
-                    </button>
+                   <form method="POST" action="{% url 'logout' %}" class="form-logout">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-logout">
+                            CERRAR SESIÓN
+                        </button>
+                    </form>
                 {% else %}
                     <a href="{% url 'login' %}" class="btn-usuario">INICIAR SESIÓN</a>
                 {% endif %}
