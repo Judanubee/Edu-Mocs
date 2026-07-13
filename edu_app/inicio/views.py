@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.http import require_POST
 
-from registros.models import Cursos, Alumnos
+from registros.models import Cursos, Alumnos, Profesores
 
 
 @login_required
@@ -49,8 +49,21 @@ def perfil_alumno(request):
 
 @login_required
 def perfil_profesor(request):
-    return render(request, "inicio/perfil_profesor.html")
+    profesor = get_object_or_404(
+        Profesores,
+        usuario=request.user
+    )
 
+    cursos = profesor.cursos.all()
+
+    return render(
+        request,
+        "inicio/perfil_profesor.html",
+        {
+            "profesor": profesor,
+            "cursos": cursos,
+        }
+    )
 
 @login_required
 def curso_info(request, id):
