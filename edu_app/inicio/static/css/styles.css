@@ -1,32 +1,1078 @@
 /* ==========================================
-   RESET Y CONFIGURACIÓN GLOBAL
+   ESTILOS DE LA PÁGINA PRINCIPAL (CATÁLOGO)
    ========================================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+
+/* Contenedor Principal */
+.principal-container {
+    background-color: #ebf0f5;
+    padding: 40px 20px;
+    font-family: sans-serif;
 }
 
-body {
-    background-color: #ffffff;
-    color: #000000;
-    line-height: 1.5;
+/* Sección de Bienvenida */
+.bienvenida-seccion {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 50px auto;
 }
 
-.container {
-    max-width: 1140px;
+.bienvenida-seccion h1 {
+    color: #1a446c;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.bienvenida-seccion p {
+    color: #4a6b82;
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Sección del Catálogo */
+.catalogo-seccion {
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 0 20px;
+}
+
+.catalogo-seccion h2 {
+    color: #1a446c;
+    font-size: 26px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+.cursos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Tarjeta del Curso (Contenedor Base) */
+.curso-tarjeta {
+    background-color: #244b70;
+    border-radius: 15px;
+    padding: 30px;
+    display: flex;
+    flex-direction: row; /* Texto izquierda, imagen derecha */
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+}
+
+/* EFECTO ZIG-ZAG: Alterna el orden de los elementos si la tarjeta es par */
+.curso-tarjeta:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+/* Información interna de la tarjeta */
+.curso-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+    color: #ffffff;
+}
+
+.curso-texto h3 {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0 0 15px 0;
+    color: #ffffff;
+}
+
+.curso-texto .descripcion {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #cbd5e1;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.curso-texto .detalles {
+    font-size: 13px;
+    color: #e2e8f0;
+    margin: 5px 0;
+}
+
+.curso-acciones {
+    margin-top: 20px;
+}
+
+/* Botón interactivo "Registrarme" */
+.btn-ver-curso {
+    display: inline-block;
+    background-color: #a3cfff;
+    color: #1a446c;
+    padding: 10px 30px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-ver-curso:hover {
+    background-color: #8bbbee;
+    transform: translateY(-2px);
+}
+
+/* Contenedor e Imagen */
+.curso-imagen-contenedor {
+    flex: 1;
+    max-width: 450px;
+    width: 100%;
+}
+
+.imagen-curso {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    object-fit: cover;
+    max-height: 250px;
+}
+
+/* Estado sin cursos */
+.sin-cursos-alerta {
+    text-align: center;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    color: #4a6b82;
+}
+
+/* --- RESPONSIVO --- */
+@media (max-width: 768px) {
+    .curso-tarjeta, 
+    .curso-tarjeta:nth-child(even) {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .curso-imagen-contenedor {
+        max-width: 100%;
+        order: -1; /* Pone la imagen arriba en móviles */
+    }
 }
 
 /* ==========================================
-   ESTILOS DEL ENCABEZADO (encabezado.html)
+   ESTILOS DE LA VISTA DETALLE (CURSO INFO)
    ========================================== */
-.navbar {
+
+.detalle-curso-page {
+    background-color: #ebf0f5;
+    padding: 40px 20px;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+/* Tarjeta contenedora azul oscuro */
+.tarjeta-detalle-curso {
+    background-color: #244b70;
+    border-radius: 15px;
+    padding: 35px;
+    max-width: 900px;
     width: 100%;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.titulo-principal-curso {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0 0 25px 0;
+}
+
+/* Banner de imagen ajustado */
+.contenedor-banner-curso {
+    width: 100%;
+    margin-bottom: 40px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.detalle-imagen {
+    width: 100%;
+    height: auto;
+    max-height: 380px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Grid de dos columnas inferiores */
+.grid-informacion-curso {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 50px;
+    align-items: start;
+}
+
+/* Columna de información izquierda */
+.columna-informacion h2,
+.columna-profesor-ficha h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 0 20px 0;
+    color: #ffffff;
+}
+
+.descripcion-curso {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #cbd5e1;
+    text-align: justify;
+    margin-bottom: 30px;
+}
+
+/* Wrapper flex para alinear los dos botones de pastilla lado a lado */
+.botones-flex-wrapper {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Estilo del botón ovalado celeste (Registrarme) */
+.btn-inscribirse,
+.btn-inscribirse-link {
+    display: inline-block;
+    background-color: #a3cfff;
+    color: #1a446c;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 25px; /* Forma de pastilla */
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.btn-inscribirse:hover,
+.btn-inscribirse-link:hover {
+    background-color: #8bbbee;
+}
+
+/* Botón complementario de favoritos en forma de pastilla coordinado con la paleta */
+.btn-favorito-accion {
+    display: inline-block;
+    padding: 11px 25px;
+    border: 2px solid #a3cfff; /* Borde celeste para integrarse al diseño */
+    border-radius: 25px; /* Misma forma de pastilla */
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+/* Estado: Añadir a Favoritos (Fondo azul oscuro traslúcido, sutil) */
+.btn-favorito-accion.agregado {
+    background-color: rgba(26, 68, 108, 0.4);
+    color: #ffffff;
+}
+
+.btn-favorito-accion.agregado:hover {
+    background-color: rgba(26, 68, 108, 0.8);
+    color: #a3cfff;
+}
+
+/* Estado: Quitar de Favoritos (Tono azul medio que denota selección guardada) */
+.btn-favorito-accion.quitado {
+    background-color: #4a7ca7;
+    border-color: #4a7ca7;
+    color: #ffffff;
+}
+
+.btn-favorito-accion.quitado:hover {
+    background-color: #3b658a;
+    border-color: #3b658a;
+}
+
+/* Columna Derecha: Perfil del profesor e información técnica */
+.columna-profesor-ficha {
+    display: flex;
+    flex-direction: column;
+}
+
+.perfil-profesor-contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+/* Imagen circular del docente */
+.imagen-profesor {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #a3cfff;
+    margin-bottom: 12px;
+}
+
+.avatar-generico-profesor {
+    font-size: 60px;
+    background: #1a446c;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.nombre-profesor {
+    font-size: 15px;
+    font-weight: 500;
+    color: #e2e8f0;
+    text-align: center;
+    margin: 0;
+}
+
+.sin-profesor-mensaje {
+    color: #cbd5e1;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Ficha de datos técnicos alineados */
+.ficha-tecnica-datos {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: rgba(26, 68, 108, 0.4);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.fila-dato {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.etiqueta-dato {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.valor-dato {
+    color: #cbd5e1;
+    text-align: right;
+}
+
+/* Ajuste Responsivo para Tablets y Smartphones */
+@media (max-width: 768px) {
+    .grid-informacion-curso {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .botones-flex-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-inscribirse,
+    .btn-favorito-accion {
+        text-align: center;
+        width: 100%;
+    }
+}
+/* ==========================================
+   IMPORTACIÓN DE FUENTE 
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+/* ==========================================
+   ESTILOS DEL BANNER PRINCIPAL ("Nuestros Cursos")
+   ========================================== */
+
+.acerca-curso-banner {
+    /* Aplicamos la fuente moderna aquí también */
+    font-family: 'Inter', sans-serif; 
+    padding: 40px 20px;
+}
+
+.acerca-curso-banner h1 {
+    font-size: 38px;
+    font-weight: 800;
+    color: #1a446c; /* Mismo tono de azul que "Cursos Disponibles" */
+    margin-bottom: 15px;
+    letter-spacing: -0.5px;
+}
+
+.subtitulo-curso {
+    font-size: 17px;
+    color: #4a5568;
+    line-height: 1.6;
+    max-width: 800px; /* Evita que el texto se estire de lado a lado en pantallas grandes */
+}
+
+/* ==========================================
+   ESTILOS DEL LISTADO DE CURSOS 
+   ========================================== */
+
+.programacion-section {
+    background-color: #ebf0f5; 
+    padding: 60px 20px;
+    font-family: 'Inter', sans-serif; 
+}
+
+.titulo-seccion-cursos {
+    text-align: center;
+    color: #1a446c;
+    font-size: 32px; 
+    font-weight: 800; 
+    margin-bottom: 40px;
+}
+
+/* Ajuste principal: Tarjetas mucho más anchas para lograr el aspecto de 2 columnas */
+.cursos-grid-mockup {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 450px)); 
+    justify-content: center; 
+    gap: 40px; /* Un poco más de separación entre tarjetas */
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Tarjeta individual */
+.tarjeta-curso-mockup {
+    background-color: #2b4c73; /* Azul oscuro más apegado al mockup */
+    border-radius: 12px; 
+    padding: 18px; /* Padding ligeramente menor para que la imagen destaque más */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.imagen-curso-mockup {
+    width: 100%;
+    height: 240px; /* Imagen mucho más alta para respetar la proporción casi cuadrada de la tarjeta */
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    background-color: #1a365d; 
+}
+
+.titulo-curso-mockup {
+    color: #ffffff;
+    font-size: 20px; /* Título un poco más grande */
+    font-weight: 700; 
+    margin: 0 0 15px 0;
+    text-align: left;
+}
+
+.contenedor-btn-ingresar {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Botón Pastilla */
+.btn-ingresar-mockup {
+    display: inline-block;
+    background-color: #9cc6ef; /* Celeste exacto del mockup */
+    color: #ffffff; /* Texto en blanco como en el diseño original */
+    padding: 8px 36px; /* Pastilla más alargada horizontalmente */
+    border-radius: 20px; 
+    font-size: 14px;
+    font-weight: 600; 
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.btn-ingresar-mockup:hover {
+    background-color: #8bbbee; 
+}
+
+.sin-cursos-mensaje {
+    text-align: center;
+    color: #4a5568;
+    width: 100%;
+    grid-column: 1 / -1;
+    font-size: 16px;
+}
+
+/* ==========================================
+   SECCIÓN: ¿QUIÉNES SOMOS? Y EQUIPO (MOCKUP)
+   ========================================== */
+
+.quienes-somos-page {
+    background-color: #ebf0f5; /* Mismo fondo grisáceo claro */
+    padding: 60px 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.qs-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Títulos principales (¿Quienes somos? / Nuestro equipo) */
+.qs-titulo {
+    text-align: center;
+    color: #2b4c73; /* Azul oscuro del mockup */
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    margin-top: 50px;
+}
+
+.seccion-info h1.qs-titulo {
+    margin-top: 0;
+}
+
+/* Caja de texto con borde de la parte superior */
+.cuadro-descripcion {
+    border: 1px solid #b2c4d9; /* Borde sutil azul/grisáceo */
+    border-radius: 8px;
+    padding: 25px 30px;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.qs-introduccion {
+    color: #718096; /* Texto gris */
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify; /* Texto justificado como en el mockup */
+    margin: 0;
+}
+
+/* Ocultamos las secciones que no salen en el mockup temporalmente */
+.mision-vision-grid, 
+.valores-container {
+    display: none; 
+}
+
+
+/* ==========================================
+   CARRUSEL 3D COVERFLOW (NUESTRO EQUIPO)
+   ========================================== */
+
+.carrusel-3d-wrapper {
+    position: relative;
+    width: 100%;
+    height: 320px; /* Altura suficiente para el efecto 3D */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px; /* Profundidad del 3D */
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+/* Tarjeta base (Se verán como polígonos grises cuando estén inactivas) */
+.tarjeta-profe {
+    position: absolute;
+    width: 480px;
+    height: 220px;
+    background-color: #666666; /* Color gris de las tarjetas inactivas del mockup */
+    transition: transform 0.5s ease, background-color 0.5s ease, opacity 0.5s ease;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* Diseño de la tarjeta central ACTIVA */
+.tarjeta-profe.active {
+    background-color: #2b4c73; /* Azul oscuro */
+    transform: translateX(0) scale(1) translateZ(0) rotateY(0deg);
+    z-index: 10;
+    opacity: 1;
+}
+
+/* Posiciones 3D de las tarjetas inactivas laterales */
+.tarjeta-profe.prev {
+    transform: translateX(-45%) scale(0.85) translateZ(-150px) rotateY(40deg);
+    z-index: 5;
+}
+
+.tarjeta-profe.next {
+    transform: translateX(45%) scale(0.85) translateZ(-150px) rotateY(-40deg);
+    z-index: 5;
+}
+
+.tarjeta-profe.far-prev {
+    transform: translateX(-75%) scale(0.7) translateZ(-300px) rotateY(50deg);
+    z-index: 4;
+}
+
+.tarjeta-profe.far-next {
+    transform: translateX(75%) scale(0.7) translateZ(-300px) rotateY(-50deg);
+    z-index: 4;
+}
+
+/* Ocultar el texto/foto en las tarjetas inactivas para que luzcan como los polígonos sólidos grises del diseño */
+.tarjeta-profe:not(.active) .tarjeta-contenido {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Contenedor interno de la tarjeta activa (Flexbox para separar texto de imagen) */
+.tarjeta-contenido {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease;
+}
+
+/* Textos de la tarjeta activa (Lado izquierdo) */
+.info-profe {
+    color: #ffffff;
+    text-align: left;
+    flex: 1;
+    padding-right: 20px;
+}
+
+.info-profe h3 {
+    margin: 0 0 15px 0;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.info-profe p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 600; /* Letra un poco más gruesa para la descripción */
+}
+
+/* Fotografía circular (Lado derecho) */
+.foto-profe {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%; /* Hace la imagen un círculo perfecto */
+    overflow: hidden;
+    flex-shrink: 0;
+    background-color: #e2e8f0; 
+    border: 3px solid #2b4c73; /* Opcional: para suavizar los bordes con el fondo */
+}
+
+.foto-profe img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.foto-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    color: #718096;
+}
+
+/* ==========================================
+   SECCIÓN: PERFIL DEL ALUMNO (MIS CURSOS)
+   ========================================== */
+
+.perfil-alumno {
+    background-color: #ebf0f5; 
+    padding: 60px 20px;
+    font-family: 'Inter', sans-serif;
+    min-height: calc(100vh - 100px); 
+}
+
+.encabezado-perfil {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+}
+
+.encabezado-perfil h1 {
+    color: #1a446c;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.encabezado-perfil p {
+    color: #4a5568;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ==========================================
+   GRID Y TARJETAS DE CURSOS EN EL PERFIL
+   ========================================== */
+
+.contenedor-cursos {
+    display: grid;
+    /* Misma proporción del catálogo principal */
+    grid-template-columns: repeat(auto-fill, minmax(380px, 450px)); 
+    justify-content: center; 
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.tarjeta-curso {
+    background-color: #2b4c73; 
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.tarjeta-curso:hover {
+    transform: translateY(-5px);
+}
+
+.contenedor-imagen {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.imagen-curso {
+    width: 100%;
+    height: 240px; 
+    object-fit: cover;
+    border-radius: 6px;
+    background-color: #1a365d;
+}
+
+/* ==========================================
+   INFORMACIÓN DENTRO DE LA TARJETA (PERFIL)
+   ========================================== */
+
+.informacion-curso {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
+}
+
+.informacion-curso h2 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+}
+
+.categoria, .duracion {
+    color: #d1e2f3; 
+    font-size: 14px;
+    margin: 0 0 6px 0;
+    font-weight: 400;
+}
+
+.duracion {
+    margin-bottom: 18px; 
+}
+
+/* ==========================================
+   BOTONES DEL PERFIL
+   ========================================== */
+
+.boton-ingresar {
+    align-self: flex-end; 
+    margin-top: auto; 
+    display: inline-block;
+    background-color: #9cc6ef; 
+    color: #ffffff;
+    padding: 8px 36px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.boton-ingresar:hover {
+    background-color: #8bbbee;
+    transform: scale(1.02);
+}
+
+/* ==========================================
+   ESTADOS VACÍOS (SIN CURSOS / SIN FAVORITOS)
+   ========================================== */
+
+.sin-cursos {
+    grid-column: 1 / -1; 
     background-color: #ffffff;
-    border-bottom: 1px solid #f0f0f0;
+    border: 1px dashed #b2c4d9;
+    border-radius: 12px;
+    padding: 50px 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.sin-cursos h2 {
+    color: #1a446c;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.sin-cursos p {
+    color: #718096;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.boton-catalogo {
+    display: inline-block;
+    background-color: #2b4c73;
+    color: #ffffff;
+    padding: 10px 32px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.boton-catalogo:hover {
+    background-color: #1a365d;
+}
+
+/* ==========================================
+   SECCIÓN: PERFIL DEL PROFESOR (CURSOS ASIGNADOS)
+   ========================================== */
+
+.perfil-profesor {
+    background-color: #ebf0f5; 
+    padding: 60px 20px;
+    font-family: 'Inter', sans-serif;
+    min-height: calc(100vh - 100px); 
+}
+
+.encabezado-profesor {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+}
+
+.encabezado-profesor h1 {
+    color: #1a446c;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+/* ==========================================
+   GRID Y TARJETAS (PROFESOR)
+   ========================================== */
+
+.contenedor-cursos-profesor {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 450px)); 
+    justify-content: center; 
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.tarjeta-curso-profesor {
+    background-color: #2b4c73; 
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.tarjeta-curso-profesor:hover {
+    transform: translateY(-5px);
+}
+
+.contenedor-imagen-profesor {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.imagen-curso-profesor {
+    width: 100%;
+    height: 240px; 
+    object-fit: cover;
+    border-radius: 6px;
+    background-color: #1a365d;
+}
+
+.imagen-sin-curso {
+    width: 100%;
+    height: 240px;
+    background-color: #1a365d;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #718096;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* ==========================================
+   INFORMACIÓN DEL CURSO Y LISTA DE ALUMNOS
+   ========================================== */
+
+.informacion-curso-profesor {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; 
+}
+
+.informacion-curso-profesor h2 {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+}
+
+.informacion-curso-profesor p, 
+.informacion-curso-profesor span {
+    color: #d1e2f3; 
+    font-size: 14px;
+    margin: 0 0 6px 0;
+}
+
+/* Contenedor de la lista de alumnos */
+.alumnos-curso {
+    margin-top: 20px;
+    background-color: #1f3a5a; /* Un azul ligeramente más oscuro para contrastar */
+    border-radius: 8px;
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.alumnos-curso h3 {
+    color: #9cc6ef; /* Celeste para resaltar el título de la lista */
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+}
+
+.total-alumnos {
+    font-weight: 600;
+    margin-bottom: 15px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+/* ==========================================
+   DATOS DE CADA ALUMNO (CON SCROLL SI HAY MUCHOS)
+   ========================================== */
+
+/* Añadimos un contenedor imaginario al forloop en Django o limitamos la altura si la lista crece */
+.alumnos-curso {
+    max-height: 250px;
+    overflow-y: auto; /* Scroll vertical si hay más de ~3 alumnos */
+}
+
+/* Estilo para la barra de scroll (opcional para que se vea bonita) */
+.alumnos-curso::-webkit-scrollbar {
+    width: 6px;
+}
+.alumnos-curso::-webkit-scrollbar-thumb {
+    background-color: #4a6fa5;
+    border-radius: 4px;
+}
+
+.alumno-inscrito {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.alumno-inscrito:last-child {
+    margin-bottom: 0;
+}
+
+.datos-alumno strong {
+    display: block;
+    color: #ffffff;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.datos-alumno p {
+    color: #a0aec0 !important; /* Gris claro para el email/username */
+    font-size: 12px !important;
+    margin: 0 !important;
+}
+
+.sin-alumnos {
+    color: #a0aec0 !important;
+    font-style: italic;
+    font-size: 13px !important;
+    text-align: center;
+    margin-top: 10px !important;
+}
+
+/* ==========================================
+   ESTADO VACÍO (SIN CURSOS ASIGNADOS)
+   ========================================== */
+
+.sin-cursos-asignados {
+    grid-column: 1 / -1; 
+    background-color: #ffffff;
+    border: 1px dashed #b2c4d9;
+    border-radius: 12px;
+    padding: 50px 20px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.sin-cursos-asignados h2 {
+    color: #1a446c;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.sin-cursos-asignados p {
+    color: #718096;
+    font-size: 16px;
+    margin: 0;
+}
+
+/* ==========================================
+   ESTILOS DEL HEADER (NAVAR)
+   ========================================== */
+
+body { font-family: 'Montserrat', sans-serif; }
+
+.navbar {
+    background-color: #ffffff; /* Fondo blanco limpio */
+    padding: 15px 40px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Sombra muy sutil */
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -38,779 +1084,156 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 24px;
 }
 
+/* Logo */
 .logo a {
-    font-size: 20px;
-    font-weight: 700;
-    color: #000000;
+    font-size: 24px;
+    font-weight: 800;
+    color: #1a446c; /* Azul principal */
     text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
+/* Menú de navegación */
 .nav-menu {
     display: flex;
-    gap: 32px;
+    gap: 25px;
 }
 
 .nav-link {
-    text-decoration: none;
-    color: #000000;
-    font-weight: 500;
-    font-size: 15px;
-}
-
-.btn-ingresar {
-    background-color: #0d0843; /* El azul oscuro de tus imágenes */
-    color: #ffffff !important;
-    padding: 10px 28px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 15px;
-    display: inline-block;
-}
-
-/* ==========================================
-   ESTILOS DE LA PÁGINA DE CURSOS (cursos.html)
-   ========================================== */
-
-/* --- Sección 1: Banner Azul Claro --- */
-.acerca-curso-banner {
-    background-color: #cce0ff; /* Fondo azul claro idéntico a tu mockup */
-    padding: 60px 0;
-}
-
-.banner-flex {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-}
-
-.banner-info {
-    flex: 1;
-}
-
-.banner-info h1 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.subtitulo-curso {
-    font-size: 15px;
-    color: #333333;
-    margin-bottom: 30px;
-    max-width: 450px;
-}
-
-.btn-inscribirme {
-    background-color: #0d0843;
-    color: #ffffff;
-    text-decoration: none;
-    padding: 12px 40px;
-    border-radius: 25px;
-    font-weight: 500;
-    font-size: 15px;
-    display: inline-block;
-}
-
-.banner-media {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.img-banner-curso {
-    width: 100%;
-    max-width: 440px;
-    height: auto;
-    border-radius: 4px; /* Ligero redondeado en las esquinas */
-    object-fit: cover;
-}
-
-/* --- Sección 2: Programación --- */
-.programacion-section {
-    padding: 60px 0;
-}
-
-.text-center-container {
-    text-align: center;
-    max-width: 850px;
-}
-
-.text-center-container h2 {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 24px;
-}
-
-.descripcion-programacion {
-    font-size: 14px;
-    color: #555555;
-    line-height: 1.6;
-    margin-bottom: 40px;
-}
-
-/* Cuadro lila/morado claro de la imagen */
-.placeholder-box-purple {
-    width: 100%;
-    max-width: 500px;
-    height: 220px;
-    background-color: #e1dfee; 
-    margin: 0 auto;
-    border-radius: 4px;
-}
-
-/* --- Sección 3: Costos --- */
-.costos-section {
-    padding: 20px 0 80px 0;
-}
-
-.costos-container {
-    max-width: 600px; /* Centrado y más angosto como en la imagen */
-}
-
-.costos-container h2 {
-    font-size: 26px;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.costos-table {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.costos-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #eaeaea; /* Línea divisoria fina */
-}
-
-.costo-tipo {
-    font-size: 18px;
-    font-weight: 500;
-    color: #333333;
-}
-
-.costo-precio {
-    font-size: 22px;
-    font-weight: 700;
-    color: #000000;
-}
-
-
-.perfil-page {
-    padding: 60px 0;
-    background-color: #ffffff;
-}
-
-.perfil-contenedor {
-    max-width: 900px; /* Un poco más angosto para que las filas se vean elegantes */
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.titulo-perfil h1 {
-    font-size: 32px;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 40px;
-    text-align: left;
-}
-
-/* Contenedor principal de las tarjetas */
-.lista-cursos-inscritos {
-    display: flex;
-    flex-direction: column;
-    gap: 40px; /* Separación marcada entre cada curso */
-}
-
-/* Tarjeta individual de curso estilo Fila Flex */
-.card-inscripcion {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid #f3f4f6; /* Línea divisoria sutil */
-}
-
-/* Invertir el orden de las tarjetas pares de forma automática (Opcional, igual que el Home) */
-.card-inscripcion:nth-child(even) {
-    flex-direction: row-reverse;
-}
-
-/* Bloque de la imagen */
-.imagen-curso-container {
-    flex: 1;
-    max-width: 350px;
-}
-
-.img-curso {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 4px;
-}
-
-.imagen-placeholder {
-    width: 100%;
-    height: 200px;
-    background-color: #e1dfee; /* Color morado claro de tus mockups */
-    border-radius: 4px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 32px;
-}
-
-/* Bloque de la información */
-.info-curso-container {
-    flex: 1.2;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.info-curso-container h2 {
-    font-size: 24px;
-    font-weight: 700;
-    color: #000000;
-    margin: 10px 0;
-}
-
-.detalles-rapidos {
-    margin-bottom: 20px;
-}
-
-.detalles-rapidos p {
-    font-size: 14px;
-    color: #555555;
-    margin-bottom: 4px;
-}
-
-/* Botón de acción al curso */
-.btn-ir-curso {
-    background-color: #0d0843; /* El azul oscuro característico */
-    color: white;
-    text-decoration: none;
-    padding: 10px 30px;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: 500;
-    display: inline-block;
-    transition: background-color 0.2s ease;
-}
-
-.btn-ir-curso:hover {
-    background-color: #1a126b;
-}
-
-/* Estados / Badges */
-.badge-estado {
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #4b5563;
-    letter-spacing: 0.5px;
-}
-
-/* --- Vista Vacía --- */
-.sin-cursos-box {
-    text-align: center;
-    padding: 60px 20px;
-    background-color: #f9fafb;
-    border-radius: 8px;
-    border: 1px dashed #e5e7eb;
-}
-
-.sin-cursos-box p {
-    font-size: 16px;
-    color: #6b7280;
-    margin-bottom: 20px;
-}
-
-.btn-explorar {
-    background-color: #0d0843;
-    color: white;
-    text-decoration: none;
-    padding: 12px 30px;
-    border-radius: 25px;
-    font-weight: 500;
-    display: inline-block;
-}
-
-
-
-
-
-
-/* ==========================================
-   DISEÑO COMPLETO PARA LA PÁGINA PRINCIPAL
-   ========================================== */
-
-/* Contenedor general */
-.main-home {
-    background-color: #ffffff;
-    font-family: 'Inter', 'Segoe UI', -apple-system, sans-serif;
-    color: #111827;
-}
-
-/* --- 1. HERO BANNER (Sección Superior Azul) --- */
-.hero-section {
-    background-color: #2563eb; /* Azul vibrante de tu mockup */
-    padding: 60px 0 0 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-container {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-}
-
-.hero-text {
-    flex: 1;
-    color: #ffffff;
-    padding-bottom: 60px;
-}
-
-.hero-text h1 {
-    font-size: 52px;
-    font-weight: 700;
-    margin: 0;
-    line-height: 1.1;
-    letter-spacing: -1px;
-}
-
-.hero-text p {
-    font-size: 20px;
-    margin-top: 12px;
-    font-weight: 400;
-    opacity: 0.95;
-}
-
-.hero-image-box {
-    flex: 1.2;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-}
-
-.hero-image-box img {
-    width: 100%;
-    max-width: 480px;
-    height: auto;
-    border-radius: 4px 4px 0 0;
-    object-fit: cover;
-    display: block;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
-}
-
-/* --- 2. DESCRIPCIÓN CENTRAL --- */
-.descripcion-central {
-    text-align: center;
-    max-width: 850px;
-    margin: 80px auto;
-    padding: 0 24px;
-}
-
-.descripcion-central p {
-    font-size: 15px;
-    color: #4b5563;
-    line-height: 1.7;
-}
-
-/* --- 3. LISTADO DE CURSOS ALTERNADOS --- */
-.home-container {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
-
-.cursos-container {
-    display: flex;
-    flex-direction: column;
-    gap: 100px; /* Separación generosa entre cursos */
-    padding-bottom: 100px;
-}
-
-/* Fila de curso (Flexbox) */
-.curso {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 80px;
-}
-
-/* Regla inteligente: Invierte el orden de los elementos en filas pares */
-.curso:nth-child(even) {
-    flex-direction: row-reverse;
-}
-
-/* Estilo para las imágenes de los cursos */
-.curso .imagen-curso, 
-.curso .imagen-placeholder {
-    flex: 1;
-    width: 100%;
-    max-width: 460px;
-    height: 280px;
-    object-fit: cover;
-    border-radius: 6px;
-    display: block;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-}
-
-.curso .imagen-placeholder {
-    background-color: #e1dfee; /* Color lila de tu mockup */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 36px;
-    color: #6b7280;
-}
-
-/* Caja de información al lado de la imagen */
-.curso-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-/* Tag o categoría del curso */
-.curso-info .categoria {
-    font-size: 12px;
-    text-transform: uppercase;
-    color: #6b7280;
-    font-weight: 600;
-    letter-spacing: 0.8px;
-    margin-bottom: 8px;
-}
-
-/* Título del curso */
-.curso h2 {
-    font-size: 32px;
-    font-weight: 700;
-    color: #000000;
-    margin-bottom: 16px;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
-}
-
-/* Descripción del curso */
-.curso p {
-    font-size: 14px;
-    color: #4b5563;
-    line-height: 1.6;
-    margin-bottom: 16px;
-}
-
-/* Datos extra (Profesor, horas) */
-.curso .detalles-texto {
-    font-size: 13px;
-    color: #1f2937;
-    margin-bottom: 28px;
-    line-height: 1.5;
-}
-
-/* --- 4. BOTÓN OVALADO "APRENDE" --- */
-.btn-aprende {
-    background-color: #0d0843 !important; /* Azul oscuro característico de las fotos */
-    color: #ffffff !important;
-    text-decoration: none;
-    padding: 12px 40px;
-    border-radius: 25px !important; /* Totalmente ovalado */
-    font-weight: 500;
-    font-size: 14px;
-    display: inline-block;
-    text-align: center;
-    letter-spacing: 0.2px;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-.btn-aprende:hover {
-    background-color: #1a126b !important;
-}
-
-.btn-aprende:active {
-    transform: scale(0.98);
-}
-
-/* Estado de lista vacía */
-.sin-cursos {
-    text-align: center;
-    font-size: 16px;
-    color: #6b7280;
-    padding: 60px;
-    background-color: #f9fafb;
-    border-radius: 8px;
-    border: 1px dashed #e5e7eb;
-}
-
-
-
-
-
-/* ==========================================
-   ESTILOS COMPLETOS EN PERSPECTIVA (MOCKUP)
-   ========================================== */
-
-.quienes-somos-page {
-    background-color: #e9edf2; /* Color de fondo gris claro de tu imagen */
-    padding: 40px 20px 80px 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.qs-container {
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-/* Títulos con el color azul oscuro */
-.qs-titulo {
-    color: #1a365d;
-    text-align: center;
-    font-size: 34px;
-    font-weight: 700;
-    margin-bottom: 24px;
-}
-
-/* Cuadro de texto superior */
-.cuadro-descripcion {
-    background-color: transparent;
-    border: 1px solid #b2c4d9;
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 50px;
-}
-
-.cuadro-descripcion p {
     color: #4a5568;
+    font-weight: 600;
+    text-decoration: none;
     font-size: 15px;
-    line-height: 1.6;
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: #1a446c;
+}
+
+/* Contenedor de Usuario */
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Botones de acción */
+.btn-usuario {
+    background-color: #1a446c; /* Azul oscuro */
+    color: #ffffff;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.btn-usuario:hover {
+    background-color: #2b4c73;
+}
+
+/* Formulario Logout */
+.form-logout {
     margin: 0;
-    text-align: justify;
 }
 
-/* --- CONTENEDOR DE LA GALERÍA --- */
-.galeria-3d-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px; /* Controla qué tan juntas se ven las tarjetas */
-    width: 100%;
-    margin-top: 40px;
-    perspective: 1000px; /* Brinda la profundidad 3D al frente */
+.btn-logout {
+    background: none;
+    border: 1px solid #1a446c;
+    color: #1a446c;
+    padding: 7px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
-/* Base de todas las tarjetas */
-.tarjeta-profe {
-    width: 380px;
-    height: 220px;
-    border-radius: 4px;
-    transition: all 0.4s ease;
-    box-sizing: border-box;
-}
-
-/* Tarjeta Central (Ej: Zaid Martinez) */
-.tarjeta-profe.centro {
-    background-color: #244b7a; /* El azul oscuro exacto de la foto */
-    transform: scale(1.05) translateZ(50px);
-    z-index: 3;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-/* Tarjeta Izquierda (Gira hacia la derecha y se encoge) */
-.tarjeta-profe.izquierda {
-    background-color: #5a5a5a; /* Gris oscuro simulando la silueta */
-    transform: rotateY(40px) scale(0.85) translateX(30px);
-    z-index: 1;
-}
-
-/* Tarjeta Derecha (Gira hacia la izquierda y se encoge) */
-.tarjeta-profe.derecha {
-    background-color: #5a5a5a; /* Gris oscuro simulando la silueta */
-    transform: rotateY(-40px) scale(0.85) translateX(-30px);
-    z-index: 1;
-}
-
-/* Estructura de contenido interno */
-.tarjeta-contenido {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: space-between;
-}
-
-/* Modificadores para ocultar o disimular texto en las siluetas laterales */
-.tarjeta-profe.izquierda .tarjeta-contenido,
-.tarjeta-profe.derecha .tarjeta-contenido {
-    opacity: 0.15; /* Apaga casi por completo el contenido lateral como en tu dibujo */
-}
-
-.tarjeta-profe.centro .tarjeta-contenido {
-    opacity: 1;
-}
-
-/* Textos informativos de la tarjeta */
-.info-profe {
-    flex: 1.2;
+.btn-logout:hover {
+    background-color: #1a446c;
     color: #ffffff;
 }
 
-.info-profe h3 {
-    font-size: 20px;
-    font-weight: 700;
-    margin: 0 0 12px 0;
-    text-transform: lowercase; /* Mantiene las minúsculas de la imagen */
-}
-
-.info-profe p {
-    font-size: 13px;
-    line-height: 1.4;
-    margin: 0;
-    text-transform: lowercase;
-    opacity: 0.9;
-}
-
-/* Contenedor e Imagen circular del profesor */
-.foto-profe {
-    flex: 0.8;
-    display: flex;
-    justify-content: center;
-}
-
-.foto-profe img, .foto-placeholder {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    object-fit: cover;
-    background-color: #ffffff;
-    display: block;
-}
-
-
-
-
-
-
-
-
-
-
-
-
+/* ==========================================
+   ESTILOS DE LA PÁGINA DE LOGIN
+   ========================================== */
 
 .login-page {
-    min-height: calc(100vh - 80px); /* Ajusta al alto de la pantalla quitando el header */
+    background-color: #ebf0f5;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
-    padding: 40px 20px;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif; /* Cambia esto si elegiste otra fuente */
 }
 
-/* Caja del formulario */
 .login-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     width: 100%;
     max-width: 400px;
-    padding: 20px;
-    background-color: #ffffff;
     text-align: center;
 }
 
-/* Título Iniciar Sesión */
 .login-container h1 {
-    font-size: 32px;
-    font-weight: 700;
-    color: #000000;
-    margin-bottom: 32px;
+    color: #1a446c;
+    margin-bottom: 25px;
+    font-weight: 800;
 }
 
-/* Formulario en columna */
-.login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-/* Contenedor de cada input */
-.campo-login {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    gap: 8px;
-}
-
-/* Etiquetas (Usuario / Contraseña) */
-.campo-login label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #000000;
-}
-
-/* Cajas de texto (Inputs) idénticas a los bordes de la página de contacto */
-.input-login {
-    width: 100%;
-    padding: 12px 14px;
-    font-size: 15px;
-    border: 1px solid #d1d5db !important; /* Forzamos el borde gris delgado */
-    border-radius: 4px !important;
-    background-color: #ffffff !important;
-    outline: none;
-    box-sizing: border-box;
-    display: block;
-    color: #000000;
-}
-
-/* Cambio de borde al hacer clic para escribir */
-.input-login:focus {
-    border-color: #0d0843 !important; 
-    box-shadow: 0 0 0 1px #0d0843;
-}
-
-/* Botón Ovalado "Iniciar sesión" (Mismo estilo que botón 'Ingresar') */
-.btn-submit-login {
-    background-color: #0d0843 !important; /* Azul oscuro de Edu Moocs */
-    color: #ffffff !important;
-    border: none;
-    padding: 12px;
-    font-size: 15px;
-    font-weight: 500;
-    border-radius: 25px; /* Bordes completamente redondos */
-    cursor: pointer;
-    margin-top: 10px;
-    width: 100%;
-    transition: background-color 0.2s ease;
-}
-
-.btn-submit-login:hover {
-    background-color: #1a126b !important;
-}
-
-/* Mensaje de error por si fallan las credenciales */
-.error-message {
-    background-color: #fee2e2;
-    color: #b91c1c;
-    padding: 12px;
-    border-radius: 4px;
-    font-size: 14px;
+.campo {
     margin-bottom: 20px;
     text-align: left;
-    border-left: 4px solid #b91c1c;
+}
+
+.campo label {
+    display: block;
+    color: #4a5568;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Estilo para los inputs de Django */
+.campo input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    box-sizing: border-box; /* Importante para que el padding no rompa el ancho */
+    font-family: inherit;
+}
+
+.error {
+    color: #e53e3e;
+    font-size: 14px;
+    margin-bottom: 20px;
+    background: #fff5f5;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.btn-login {
+    width: 100%;
+    background-color: #1a446c;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-login:hover {
+    background-color: #2b4c73;
 }

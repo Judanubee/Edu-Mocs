@@ -4,47 +4,55 @@
 {% block titulo %}Edu Moocs - Cursos{% endblock titulo %}
 
 {% block contenido %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}?v=1.6">
+
 <main class="curso-detalle-page">
 
+    <!-- Banner principal de la sección de cursos -->
     <section class="acerca-curso-banner">
         <div class="container banner-flex">
             <div class="banner-info">
-                <h1>Acerca del curso</h1>
+                <h1>Nuestros Cursos</h1>
                 <p class="subtitulo-curso">
-                    En este curso aprenderás lo necesario para desarrollarte en el fascinante mundo del Desarrollo Web con Django, construyendo aplicaciones robustas y escalables desde cero.
+                    Explora nuestra oferta educativa y encuentra el curso ideal para ti. Aprende desarrollo web, backend, programación y más con instructores especializados.
                 </p>
-                <a href="#" class="btn-inscribirme">Inscribirme</a>
             </div>
             <div class="banner-media">
-                <img src="{% static 'images/working.jpg' %}" alt="Desarrollo en Django" class="img-banner-curso">
+                <img src="{% static 'images/working.jpg' %}" alt="Explorar Cursos" class="img-banner-curso">
             </div>
         </div>
     </section>
 
+    <!-- Listado dinámico de Cursos Adaptado al Mockup -->
     <section class="programacion-section">
-        <div class="container text-center-container">
-            <h2>Programación</h2>
-            <p class="descripcion-programacion">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, quam vel convallis egestas, risus leo blandit sapien, eu egestas magna erat id eros. Integer vel tristique velit, eget varius nulla. Nunc id lectus sit amet nisl faucibus pulvinar quis nec magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-            </p>
+        <div class="container">
+            <h2 class="titulo-seccion-cursos">Cursos Disponibles</h2>
             
-            <div class="placeholder-box-purple"></div>
-        </div>
-    </section>
-
-    <section class="costos-section">
-        <div class="container costos-container">
-            <h2>Costos</h2>
-            
-            <div class="costos-table">
-                <div class="costos-row">
-                    <span class="costo-tipo">Mensual</span>
-                    <span class="costo-precio">$100M</span>
-                </div>
-                <div class="costos-row">
-                    <span class="costo-tipo">Semestral</span>
-                    <span class="costo-precio">$100M</span>
-                </div>
+            <div class="cursos-grid-mockup">
+                {% for curso in cursos %}
+                    <div class="tarjeta-curso-mockup">
+                        <div class="tarjeta-curso-top">
+                            {% if curso.imagen %}
+                                <img src="{{ curso.imagen.url }}" alt="{{ curso.nombre }}" class="imagen-curso-mockup">
+                            {% else %}
+                                <img src="{% static 'images/working.jpg' %}" alt="{{ curso.nombre }}" class="imagen-curso-mockup">
+                            {% endif %}
+                            
+                            <h3 class="titulo-curso-mockup">{{ curso.nombre }}</h3>
+                        </div>
+                        
+                        <div class="tarjeta-curso-bottom">
+                            <!-- Botón estilo pastilla alineado a la derecha como el mockup -->
+                            <div class="contenedor-btn-ingresar">
+                                <a href="{% url 'curso_info' curso.id %}" class="btn-ingresar-mockup">
+                                    Ingresar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="sin-cursos-mensaje">No hay cursos disponibles en este momento.</p>
+                {% endfor %}
             </div>
         </div>
     </section>

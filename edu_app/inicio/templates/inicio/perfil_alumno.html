@@ -3,83 +3,74 @@
 
 {% block contenido %}
 
-<link rel="stylesheet" href="{% static 'registros/css/perfil_alumno.css' %}">
 
 <main class="perfil-alumno">
 
+    <!-- SECCIÓN: CURSOS INSCRITOS -->
     <section class="encabezado-perfil">
         <h1>Mis cursos</h1>
-
-        <p>
-            Consulta los cursos en los que estás inscrito.
-        </p>
+        <p>Consulta los cursos en los que estás inscrito.</p>
     </section>
 
     <section class="contenedor-cursos">
-
         {% for curso in cursos %}
-
             <article class="tarjeta-curso">
-
                 <div class="contenedor-imagen">
-
                     {% if curso.imagen %}
-                        <img
-                            src="{{ curso.imagen.url }}"
-                            alt="Imagen del curso {{ curso.nombre }}"
-                            class="imagen-curso"
-                        >
+                        <img src="{{ curso.imagen.url }}" alt="Imagen del curso {{ curso.nombre }}" class="imagen-curso">
                     {% else %}
-                        <img
-                            src="{% static 'registros/img/curso_sin_imagen.png' %}"
-                            alt="Curso sin imagen"
-                            class="imagen-curso"
-                        >
+                        <img src="{% static 'registros/img/curso_sin_imagen.png' %}" alt="Curso sin imagen" class="imagen-curso">
                     {% endif %}
-
                 </div>
 
                 <div class="informacion-curso">
-
                     <h2>{{ curso.nombre }}</h2>
+                    <p class="categoria">{{ curso.categoria }}</p>
+                    <p class="duracion">Duración: {{ curso.horas }} horas</p>
+                    <a href="{% url 'curso_info' curso.id %}" class="boton-ingresar">Ingresar</a>
+                </div>
+            </article>
+        {% empty %}
+            <div class="sin-cursos">
+                <h2>Aún no tienes cursos inscritos</h2>
+                <p>Explora el catálogo y selecciona el curso que deseas estudiar.</p>
+                <a href="{% url 'cursos' %}" class="boton-catalogo">Ver cursos</a>
+            </div>
+        {% endfor %}
+    </section>
 
-                    <p class="categoria">
-                        {{ curso.categoria }}
-                    </p>
+    <hr style="border: 0; height: 1px; background: #b2c4d9; margin: 50px 0;">
 
-                    <p class="duracion">
-                        Duración: {{ curso.horas }} horas
-                    </p>
+    <!-- SECCIÓN: CURSOS FAVORITOS -->
+    <section class="encabezado-perfil">
+        <h1>Mis Cursos Favoritos</h1>
+        <p>Lista de los programas que guardaste como de tu interés.</p>
+    </section>
 
-                    <a
-                        href="{% url 'curso_info' curso.id %}"
-                        class="boton-ingresar"
-                    >
-                        Ingresar
-                    </a>
-
+    <section class="contenedor-cursos">
+        {% for curso in favoritos %}
+            <article class="tarjeta-curso">
+                <div class="contenedor-imagen">
+                    {% if curso.imagen %}
+                        <img src="{{ curso.imagen.url }}" alt="Imagen del curso {{ curso.nombre }}" class="imagen-curso">
+                    {% else %}
+                        <img src="{% static 'registros/img/curso_sin_imagen.png' %}" alt="Curso sin imagen" class="imagen-curso">
+                    {% endif %}
                 </div>
 
+                <div class="informacion-curso">
+                    <h2>{{ curso.nombre }}</h2>
+                    <p class="categoria">{{ curso.categoria }}</p>
+                    <p class="duracion">Duración: {{ curso.horas }} horas</p>
+                    <a href="{% url 'curso_info' curso.id %}" class="boton-ingresar">Ver detalles</a>
+                </div>
             </article>
-
         {% empty %}
-
-            <div class="sin-cursos">
-
-                <h2>Aún no tienes cursos inscritos</h2>
-
-                <p>
-                    Explora el catálogo y selecciona el curso que deseas estudiar.
-                </p>
-
-                <a href="{% url 'cursos' %}" class="boton-catalogo">
-                    Ver cursos
-                </a>
-
+            <div class="sin-cursos" style="width: 100%; text-align: center;">
+                <h2>No has guardado ningún curso en favoritos</h2>
+                <p>Navega por las opciones disponibles y añade los que más te llamen la atención.</p>
             </div>
-
         {% endfor %}
-
     </section>
 
 </main>

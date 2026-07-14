@@ -1,94 +1,100 @@
 {% extends "inicio/encabezado.html" %}
-
-
+{% load static %}
 
 {% block titulo %}
     {{ curso.nombre }}
 {% endblock titulo %}
 
 {% block contenido %}
+<!-- Vinculamos tu archivo centralizado de estilos -->
+<link rel="stylesheet" href="{% static 'css/styles.css' %}?v=1.5">
 
-<div class="detalle-curso">
+<main class="detalle-curso-page">
+    <div class="tarjeta-detalle-curso">
+        
+        <!-- Título del Curso superior -->
+        <h1 class="titulo-principal-curso">{{ curso.nombre }}</h1>
 
-    {% if curso.imagen %}
-        <img
-            src="{{ curso.imagen.url }}"
-            alt="{{ curso.nombre }}"
-            class="detalle-imagen"
-        >
-    {% endif %}
-
-    <h1>{{ curso.nombre }}</h1>
-
-    <p>{{ curso.descripcion }}</p>
-
-    <p>
-        <strong>Categoría:</strong>
-        {{ curso.categoria }}
-    </p>
-
-    <p>
-        <strong>Duración:</strong>
-        {{ curso.horas }} horas
-    </p>
-
-    {% if curso.profesor %}
-        <div class="profesor-curso">
-
-            {% if curso.profesor.perfil %}
-                <img
-                    src="{{ curso.profesor.perfil.url }}"
-                    alt="{{ curso.profesor.nombre }}"
-                    class="imagen-profesor"
-                >
-            {% endif %}
-
-            <h2>Profesor</h2>
-            <p>{{ curso.profesor.nombre }}</p>
-
-            {% if curso.profesor.desc_profesor %}
-                <p>{{ curso.profesor.desc_profesor }}</p>
-            {% endif %}
-
-        </div>
-    {% else %}
-        <p>Este curso todavía no tiene profesor asignado.</p>
-    {% endif %}
-
-    {% if user.is_authenticated and es_alumno %}
-
-        {% if curso in user.perfil_alumno.cursos.all %}
-            <p class="mensaje-inscrito">
-                Ya estás inscrito en este curso.
-            </p>
-        {% else %}
-            <form method="POST"
-                action="{% url 'inscribirse_curso' curso.id %}">
-                {% csrf_token %}
-
-                <button type="submit" class="btn-inscribirse">
-                    Inscribirse
-                </button>
-            </form>
+        <!-- Imagen Destacada -->
+        {% if curso.imagen %}
+            <div class="contenedor-banner-curso">
+                <img src="{{ curso.imagen.url }}" alt="{{ curso.nombre }}" class="detalle-imagen">
+            </div>
         {% endif %}
 
-    {% elif user.is_authenticated %}
+        <!-- Grid de dos columnas para la información inferior -->
+        <div class="grid-informacion-curso">
+            
+            <!-- Columna Izquierda: Información y Botones de Pastilla -->
+            <div class="columna-informacion">
+                <h2>Información del curso</h2>
+                <p class="descripcion-curso">{{ curso.descripcion }}</p>
 
-        <p>Solo los alumnos pueden inscribirse a cursos.</p>
+                <!-- Contenedor dinámico de acciones de usuario -->
+                <div class="acciones-curso-bloque">
+                    {% if user.is_authenticated and es_alumno %}
+                        <div class="botones-flex-wrapper">
+                            {% if curso in user.perfil_alumno.cursos.all %}
+                                <p class="mensaje-inscrito">Ya estás inscrito en este curso.</p>
+                            {% else %}
+                                <form method="POST" action="{% url 'inscribirse_curso' curso.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-inscribirse">Registrarme</button>
+                                </form>
+                            {% endif %}
 
-    {% else %}
+                            <!-- Botón de Favoritos en forma de pastilla al lado -->
+                            <form method="POST" action="{% url 'marcar_favorito' curso.id %}">
+                                {% csrf_token %}
+                                {% if curso in user.perfil_alumno.cursos_favoritos.all %}
+                                    <button type="submit" class="btn-favorito-accion quitado">Quitar de Favoritos</button>
+                                {% else %}
+                                    <button type="submit" class="btn-favorito-accion agregado">Añadir a Favoritos</button>
+                                {% endif %}
+                            </form>
+                        </div>
+                    {% elif user.is_authenticated %}
+                        <p class="aviso-usuario-tipo">Solo los alumnos pueden inscribirse a cursos.</p>
+                    {% else %}
+                        <a href="{% url 'login' %}?next={{ request.path }}" class="btn-inscribirse-link">
+                            Inicia sesión para inscribirte
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
 
-        <a href="{% url 'login' %}?next={{ request.path }}"
-        class="btn-inscribirse">
-            Inicia sesión para inscribirte
-        </a>
+            <!-- Columna Derecha: Profesor y Ficha Técnica -->
+            <div class="columna-profesor-ficha">
+                <h2>Profesor asignado</h2>
+                
+                {% if curso.profesor %}
+                    <div class="perfil-profesor-contenedor">
+                        {% if curso.profesor.perfil %}
+                            <img src="{{ curso.profesor.perfil.url }}" alt="{{ curso.profesor.nombre }}" class="imagen-profesor">
+                        {% else %}
+                            <div class="avatar-generico-profesor">👤</div>
+                        {% endif %}
+                        <p class="nombre-profesor">{{ curso.profesor.nombre }}</p>
+                    </div>
+                {% else %}
+                    <p class="sin-profesor-mensaje">Este curso todavía no tiene profesor asignado.</p>
+                {% endif %}
 
-    {% endif %}
+                <!-- Ficha técnica con los datos alineados -->
+                <div class="ficha-tecnica-datos">
+                    <div class="fila-dato">
+                        <span class="etiqueta-dato">DURACIÓN:</span>
+                        <span class="valor-dato">{{ curso.horas }} horas</span>
+                    </div>
+                    <div class="fila-dato">
+                        <span class="etiqueta-dato">CATEGORÍA:</span>
+                        <span class="valor-dato">{{ curso.categoria }}</span>
+                    </div>
+                </div>
 
+            </div>
 
-
-
-    
-</div>
-
+        </div>
+    </div>
+</main>
 {% endblock contenido %}

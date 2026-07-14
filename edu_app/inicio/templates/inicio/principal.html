@@ -1,31 +1,64 @@
 {% extends "inicio/encabezado.html" %}
+{% load static %}
 
-
-
-{% 
-    {% block titulo %} Principal {% endblock titulo %}
-%}
+{% block titulo %} Principal {% endblock titulo %}
 
 {% block contenido %}
-    <h1>Bienvenido a EDU MOCS</h1>
-    <p>Este es el contenido principal de la página.</p>
+<!-- El link DEBE estar aquí adentro para que Django lo renderice -->
+<link rel="stylesheet" href="{% static 'css/styles.css' %}?v=1.2">
 
+<main class="principal-container">
+    
+    <!-- Sección de Bienvenida -->
+    <section class="bienvenida-seccion">
+        <h1>Bienvenido a EDU MOOCS</h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercit.
+        </p>
+    </section>
 
-    <div class = "cursos-container">
-        {% for curso in cursos %}
-        <div class="curso">
-        {% if curso.imagen %}
-            <img src="{{ curso.imagen.url }}" alt="{{ curso.nombre }}" class="imagen-curso">
-        {% endif %}
-            <h2>{{ curso.nombre }}</h2>
-            <p>{{ curso.descripcion }}</p>
-            <strong>Categoria:</strong> {{ curso.categoria }}<br>
-            <p> <strong>Duración:</strong> {{ curso.horas }} Horas </p><br>
-            <a href="{% url 'curso_info' curso.id %}" class="btn-ver-curso">Ver curso</a>
-        {% empty %}
-            <p>No hay cursos disponibles.</p>      
-        {% endfor %}
+    <!-- Sección del Catálogo -->
+    <section class="catalogo-seccion">
+        <h2>Conoce nuestros cursos</h2>
+
+        <div class="cursos-lista">
+            {% for curso in cursos %}
+                <article class="curso-tarjeta">
+                    
+                    <!-- Información del Curso -->
+                    <div class="curso-info">
+                        <div class="curso-texto">
+                            <h3>{{ curso.nombre }}</h3>
+                            <p class="descripcion">{{ curso.descripcion }}</p>
+                            <p class="detalles">
+                                <strong>Categoría:</strong> {{ curso.categoria }} | <strong>Duración:</strong> {{ curso.horas }} Horas
+                            </p>
+                        </div>
+                        
+                        <div class="curso-acciones">
+                            <a href="{% url 'curso_info' curso.id %}" class="btn-ver-curso">
+                                Registrarme
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Imagen del Curso -->
+                    <div class="curso-imagen-contenedor">
+                        {% if curso.imagen %}
+                            <img src="{{ curso.imagen.url }}" alt="{{ curso.nombre }}" class="imagen-curso">
+                        {% else %}
+                            <img src="{% static 'images/working.jpg' %}" alt="Por defecto" class="imagen-curso">
+                        {% endif %}
+                    </div>
+
+                </article>
+            {% empty %}
+                <div class="sin-cursos-alerta">
+                    <p>No hay cursos disponibles por el momento.</p>
+                </div>
+            {% endfor %}
         </div>
+    </section>
 
-
-{% endblock %}
+</main>
+{% endblock contenido %}

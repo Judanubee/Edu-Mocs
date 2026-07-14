@@ -23,53 +23,60 @@ from inicio import views
 from registros.views import LoginPersonalizado
 from registros import views as registros_views
 
-
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.principal, name='principal'),
     path('cursos/', views.cursos, name='cursos'),
     path('contacto/', views.contacto, name='contacto'),
     path('perfil/', views.perfil, name='perfil'),
-    path("login/",LoginPersonalizado.as_view(),name="login"),
-    path("logout/",auth_views.LogoutView.as_view(),name="logout"),
+    path("login/", LoginPersonalizado.as_view(), name="login"),
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("perfil_alumno/", views.perfil_alumno, name="perfil_alumno"),
     path("perfil_profesor/", views.perfil_profesor, name="perfil_profesor"),
+    
     path(
         "curso_info/<int:id>/",
         views.curso_info,
         name="curso_info"
     ),
-      path(
+    
+    path(
         "inscribirse_curso/<int:id>/",
         views.inscribirse_curso,
         name="inscribirse_curso"
     ),
+    
+    # NUEVA RUTA: Registrar favoritos para los alumnos
     path(
-    "panel-administrador/",
-    registros_views.panel_administrador,
-    name="panel_administrador"
-),
+        "marcar_favorito/<int:id>/",
+        views.marcar_favorito,
+        name="marcar_favorito"
+    ),
 
-path(
-    "panel-administrador/alumnos/nuevo/",
-    registros_views.registrar_alumno,
-    name="registrar_alumno"
-),
+    path(
+        "panel-administrador/",
+        registros_views.panel_administrador,
+        name="panel_administrador"
+    ),
 
-path(
-    "panel-administrador/profesores/nuevo/",
-    registros_views.registrar_profesor,
-    name="registrar_profesor"
-),
+    path(
+        "panel-administrador/alumnos/nuevo/",
+        registros_views.registrar_alumno,
+        name="registrar_alumno"
+    ),
 
-path(
-    "panel-administrador/cursos/nuevo/",
-    registros_views.registrar_curso,
-    name="registrar_curso"
-),
-    ]
+    path(
+        "panel-administrador/profesores/nuevo/",
+        registros_views.registrar_profesor,
+        name="registrar_profesor"
+    ),
+
+    path(
+        "panel-administrador/cursos/nuevo/",
+        registros_views.registrar_curso,
+        name="registrar_curso"
+    ),
+]
 
 if settings.DEBUG:
     from django.conf.urls.static import static

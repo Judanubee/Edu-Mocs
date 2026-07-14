@@ -26,7 +26,12 @@ def cursos(request):
 
 @login_required
 def contacto(request):
-    return render(request, "inicio/contacto.html")
+    # Traemos todos los profesores de la base de datos para el carrusel
+    lista_profesores = Profesores.objects.all()
+
+    return render(request, "inicio/contacto.html", {
+        "profesores": lista_profesores,
+    })
 
 
 @login_required
@@ -44,6 +49,7 @@ def perfil_alumno(request):
     return render(request, "inicio/perfil_alumno.html", {
         "alumno": alumno,
         "cursos": alumno.cursos.all(),
+        "favoritos": alumno.cursos_favoritos.all(), # <- Agregamos esta línea
     })
 
 
@@ -60,6 +66,7 @@ def perfil_profesor(request):
         "profesor": profesor,
         "cursos": cursos,
     })
+
 
 @login_required
 def curso_info(request, id):
@@ -90,5 +97,29 @@ def inscribirse_curso(request, id):
         request,
         f"Te inscribiste correctamente al curso {curso.nombre}."
     )
+
+    return redirect("curso_info", id=id)
+
+@login_required
+@require_POST
+def marcar_favorito(request, id):
+    curso = get_object_or_404(Cursos, id=id)
+
+    try:
+        alumno = request.user.perfil_alumno
+    except Alumnos.DoesNotExist:
+        messages.error(
+            request,
+            "Tu usuario no tiene un perfil de alumno."
+        )
+        return redirect("curso_info", id=id)
+
+    # Si ya está en favoritos, lo quita; si no, lo agrega (Toggle)
+    if curso in alumno.cursos_favoritos.all():
+        alumno.cursos_favoritos.remove(curso)
+        messages.success(request, f"Se quitó {curso.nombre} de tus favoritos.")
+    else:
+        alumno.cursos_favoritos.add(curso)
+        messages.success(request, f"Se añadió {curso.nombre} a tus favoritos.")
 
     return redirect("curso_info", id=id)

@@ -1,41 +1,32 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Iniciar sesión | Edu Mocs</title>
-    <link rel="stylesheet" href="">
+    <title>Iniciar sesión | Edu Moocs</title>
+    <!-- Asegúrate de tener aquí el link de tu nueva fuente, ejemplo: Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-
-<body>
+<body class="login-page">
 
 <div class="login-container">
-
     <h1>Iniciar sesión</h1>
 
     {% if form.errors %}
-        <p class="error">
-            El usuario o la contraseña son incorrectos.
-        </p>
+        <p class="error">El usuario o la contraseña son incorrectos.</p>
     {% endif %}
 
-    <form method="POST">
+    <form method="POST" class="login-form">
         {% csrf_token %}
 
         <div class="campo">
-            <label for="{{ form.username.id_for_label }}">
-                Usuario 
-            </label>
-
+            <label for="{{ form.username.id_for_label }}">Usuario</label>
             {{ form.username }}
         </div>
 
         <div class="campo">
-            <label for="{{ form.password.id_for_label }}">
-                Contraseña
-            </label>
-
+            <label for="{{ form.password.id_for_label }}">Contraseña</label>
             {{ form.password }}
         </div>
 
@@ -43,11 +34,8 @@
             <input type="hidden" name="next" value="{{ next }}">
         {% endif %}
 
-        <button type="submit">
-            Iniciar sesión
-        </button>
+        <button type="submit" class="btn-login">Iniciar sesión</button>
     </form>
-
 </div>
 
 </body>

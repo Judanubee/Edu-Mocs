@@ -3,175 +3,16 @@
 
 {% block titulo %}¿Quiénes somos? | Edu Moocs{% endblock titulo %}
 
+<!-- 1. Clics/enlaces de estilos externos -->
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock extra_css %}
+
 {% block contenido %}
-<!-- ESTILOS COMPLETOS DEL CARRUSEL INTERACTIVO -->
-<style>
-    .quienes-somos-page {
-        background-color: #e9edf2 !important;
-        padding: 40px 20px 80px 20px !important;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-        display: block !important;
-        min-height: 80vh;
-        overflow-x: hidden;
-    }
-
-    .qs-container {
-        max-width: 1000px !important;
-        margin: 0 auto !important;
-    }
-
-    .qs-titulo {
-        color: #1a365d !important;
-        text-align: center !important;
-        font-size: 32px !important;
-        font-weight: 700 !important;
-        margin-bottom: 20px !important;
-        margin-top: 20px !important;
-    }
-
-    .cuadro-descripcion {
-        background-color: transparent !important;
-        border: 1px solid #b2c4d9 !important;
-        border-radius: 12px !important;
-        padding: 24px !important;
-        margin-bottom: 50px !important;
-    }
-
-    .cuadro-descripcion p {
-        color: #4a5568 !important;
-        font-size: 15px !important;
-        line-height: 1.6 !important;
-        margin: 0 !important;
-        text-align: justify !important;
-    }
-
-    /* --- ESCENARIO 3D DEL CARRUSEL --- */
-    .carrusel-3d-wrapper {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: center !important;
-        position: relative !important;
-        min-height: 320px !important;
-        margin-top: 40px !important;
-        perspective: 1200px !important; /* Mantiene la profundidad de los giros */
-    }
-
-    /* Base de las tarjetas */
-    .tarjeta-profe {
-        position: absolute !important;
-        width: 380px !important;
-        height: 220px !important;
-        border-radius: 4px !important;
-        cursor: pointer !important;
-        transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, background-color 0.5s ease !important;
-        box-sizing: border-box !important;
-        user-select: none !important;
-        visibility: hidden; /* Oculta por defecto las que queden fuera del rango visual */
-        opacity: 0;
-    }
-
-    /* Contenido interno */
-    .tarjeta-contenido {
-        display: flex !important;
-        width: 100% !important;
-        height: 100% !important;
-        padding: 20px !important;
-        box-sizing: border-box !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-    }
-
-    .info-profe {
-        flex: 1.2 !important;
-        color: #ffffff !important;
-        text-align: left !important;
-    }
-
-    .info-profe h3 {
-        font-size: 20px !important;
-        font-weight: 700 !important;
-        margin: 0 0 12px 0 !important;
-        text-transform: lowercase !important;
-    }
-
-    .info-profe p {
-        font-size: 13px !important;
-        line-height: 1.4 !important;
-        margin: 0 !important;
-        text-transform: lowercase !important;
-        opacity: 0.9 !important;
-    }
-
-    .foto-profe {
-        flex: 0.8 !important;
-        display: flex !important;
-        justify-content: center !important;
-    }
-
-    .foto-profe img, .foto-placeholder {
-        width: 110px !important;
-        height: 110px !important;
-        border-radius: 50% !important;
-        object-fit: cover !important;
-        background-color: #ffffff !important;
-        display: block !important;
-    }
-
-    /* =======================================================
-       CLASES DINÁMICAS QUE ASIGNARÁ JAVASCRIPT SEGÚN EL ORDEN
-       ======================================================= */
-
-    /* Tarjeta al frente (Activa) */
-    .tarjeta-profe.active {
-        visibility: visible !important;
-        opacity: 1 !important;
-        background-color: #244b7a !important; /* Azul original */
-        transform: translateX(0) translateZ(100px) scale(1) !important;
-        z-index: 10 !important;
-        pointer-events: auto !important; /* Permite clicks */
-    }
-    .tarjeta-profe.active .tarjeta-contenido { opacity: 1 !important; }
-
-    /* Tarjeta inmediatamente a la izquierda */
-    .tarjeta-profe.prev {
-        visibility: visible !important;
-        opacity: 1 !important;
-        background-color: #5a5a5a !important; /* Gris silueta */
-        transform: translateX(-240px) translateZ(-100px) rotateY(40deg) scale(0.85) !important;
-        z-index: 5 !important;
-    }
-    .tarjeta-profe.prev .tarjeta-contenido { opacity: 0.15 !important; }
-
-    /* Tarjeta inmediatamente a la derecha */
-    .tarjeta-profe.next {
-        visibility: visible !important;
-        opacity: 1 !important;
-        background-color: #5a5a5a !important; /* Gris silueta */
-        transform: translateX(240px) translateZ(-100px) rotateY(-40deg) scale(0.85) !important;
-        z-index: 5 !important;
-    }
-    .tarjeta-profe.next .tarjeta-contenido { opacity: 0.15 !important; }
-
-    /* Tarjetas ocultas más atrás en el fondo (por si hay 4 o más profesores) */
-    .tarjeta-profe.far-prev {
-        visibility: visible !important;
-        opacity: 0 !important;
-        transform: translateX(-400px) translateZ(-200px) scale(0.7) !important;
-        z-index: 1 !important;
-    }
-    .tarjeta-profe.far-next {
-        visibility: visible !important;
-        opacity: 0 !important;
-        transform: translateX(400px) translateZ(-200px) scale(0.7) !important;
-        z-index: 1 !important;
-    }
-</style>
-
 <main class="quienes-somos-page">
     <div class="qs-container">
         
         <!-- Sección ¿Quiénes somos? -->
-<!-- Sección ¿Quiénes somos? Ordenada -->
         <section class="seccion-info">
             <h1 class="qs-titulo">¿Quiénes somos?</h1>
             
@@ -238,29 +79,32 @@
 </main>
 
 <!-- JAVASCRIPT DE CONTROL DEL CARRUSEL -->
+
+<!-- JAVASCRIPT DE CONTROL DEL CARRUSEL CORREGIDO -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const tarjetas = Array.from(document.querySelectorAll('.tarjeta-profe'));
         if (tarjetas.length === 0) return;
 
-        // Empezamos con la segunda tarjeta (índice 1) al centro si hay suficientes, sino la primera
+        // Si solo hay un profesor registrado, lo dejamos fijo al centro
+        if (tarjetas.length === 1) {
+            tarjetas[0].classList.add('active');
+            tarjetas[0].style.position = 'relative'; // Evita que flote de forma absoluta desalineado
+            tarjetas[0].style.margin = '0 auto';
+            return;
+        }
         let currentIndex = tarjetas.length > 1 ? 1 : 0;
-
         function actualizarCarrusel() {
             const total = tarjetas.length;
             
             tarjetas.forEach((tarjeta, i) => {
-                // Limpiamos clases viejas
                 tarjeta.classList.remove('active', 'prev', 'next', 'far-prev', 'far-next');
                 
-                // Calculamos la distancia circular en el carrusel
                 let diff = i - currentIndex;
                 
-                // Ajustamos para que dé la vuelta infinitamente
                 if (diff < -1 && diff < -total / 2) diff += total;
                 if (diff > 1 && diff > total / 2) diff -= total;
 
-                // Asignamos estados basados en la distancia respecto a la tarjeta activa
                 if (diff === 0) {
                     tarjeta.classList.add('active');
                 } else if (diff === -1) {
@@ -275,7 +119,6 @@
             });
         }
 
-        // Permitir cambiar el foco del carrusel haciendo clic directamente en las tarjetas laterales
         tarjetas.forEach((tarjeta) => {
             tarjeta.addEventListener('click', function() {
                 currentIndex = parseInt(this.getAttribute('data-index'));
@@ -283,7 +126,6 @@
             });
         });
 
-        // Inicializar posiciones al cargar la página
         actualizarCarrusel();
     });
 </script>
